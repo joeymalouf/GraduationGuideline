@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationGuideline.web", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationGuideline.test", "GraduationGuideline.test\GraduationGuideline.test.csproj", "{EF883927-7F6D-4755-AF3D-7F529FE4B00B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationGuideline.domain", "GraduationGuideline.domain\GraduationGuideline.domain.csproj", "{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{EF883927-7F6D-4755-AF3D-7F529FE4B00B}.Release|x64.Build.0 = Release|Any CPU
 		{EF883927-7F6D-4755-AF3D-7F529FE4B00B}.Release|x86.ActiveCfg = Release|Any CPU
 		{EF883927-7F6D-4755-AF3D-7F529FE4B00B}.Release|x86.Build.0 = Release|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Debug|x64.Build.0 = Debug|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Debug|x86.Build.0 = Debug|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x64.ActiveCfg = Release|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x64.Build.0 = Release|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x86.ActiveCfg = Release|Any CPU
+		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
