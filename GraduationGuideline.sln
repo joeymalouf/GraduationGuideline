@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationGuideline.test", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationGuideline.domain", "GraduationGuideline.domain\GraduationGuideline.domain.csproj", "{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationGuideline.data", "GraduationGuideline.data\GraduationGuideline.data.csproj", "{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x64.Build.0 = Release|Any CPU
 		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x86.ActiveCfg = Release|Any CPU
 		{91CAA24E-E2D3-4B73-8212-AD1EDC4B7000}.Release|x86.Build.0 = Release|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Debug|x64.Build.0 = Debug|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Debug|x86.Build.0 = Debug|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Release|x64.ActiveCfg = Release|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Release|x64.Build.0 = Release|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Release|x86.ActiveCfg = Release|Any CPU
+		{E2CC829B-CBBF-495D-96DD-6BD9E9E732BC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
