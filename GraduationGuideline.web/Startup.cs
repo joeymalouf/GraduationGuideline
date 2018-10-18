@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GraduationGuideline.domain.interfaces;
 using GraduationGuideline.domain.services;
+using GraduationGuideline.data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraduationGuideline.web
 {
@@ -22,6 +24,7 @@ namespace GraduationGuideline.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<GraduationGuidelineContext>(options => options.UseNpgsql("User Id=GraduationGuideline;Password=jubjub67;Host=localhost;Port=5432;Database=GraduationGuideline"));
             services.AddTransient<IWeatherService, WeatherService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

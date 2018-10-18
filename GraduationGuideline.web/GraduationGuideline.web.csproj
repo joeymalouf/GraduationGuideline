@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GraduationGuideline.domain\GraduationGuideline.domain.csproj" />
+    <ProjectReference Include="..\GraduationGuideline.data\GraduationGuideline.data.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
