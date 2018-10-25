@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { StepsComponent } from './steps/steps.component';
+import { Gs8Component } from './gs8/gs8.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StepsComponent } from './steps/steps.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    StepsComponent
+    StepsComponent,
+    Gs8Component,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,8 @@ import { StepsComponent } from './steps/steps.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'steps', component: StepsComponent },
+      { path: 'gs8', component: Gs8Component },
+
     ])
   ],
   providers: [],

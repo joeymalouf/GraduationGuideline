@@ -9,6 +9,8 @@ using GraduationGuideline.domain.interfaces;
 using GraduationGuideline.domain.services;
 using GraduationGuideline.data;
 using Microsoft.EntityFrameworkCore;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 
 namespace GraduationGuideline.web
 {
@@ -27,6 +29,8 @@ namespace GraduationGuideline.web
             services.AddDbContext<GraduationGuidelineContext>(options => options.UseNpgsql("User Id=GraduationGuideline;Password=jubjub67;Host=localhost;Port=5432;Database=GraduationGuideline"));
             services.AddTransient<IWeatherService, WeatherService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
