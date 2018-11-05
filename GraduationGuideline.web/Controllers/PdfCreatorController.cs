@@ -18,6 +18,7 @@ namespace GraduationGuideline.web.Controllers
         }
  
         [HttpGet]
+        // [Route("api/[controller]/{form:int}")]
         public IActionResult CreatePDF()
         {
             var globalSettings = new GlobalSettings
@@ -26,16 +27,15 @@ namespace GraduationGuideline.web.Controllers
                 Orientation = Orientation.Portrait,
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = "PDF Report"
+                DocumentTitle = "PDF Report",
+                DPI = 380
             };
  
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent = TemplateGenerator.GetHTMLString(),
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet =  Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+                HtmlContent = GS8Generator.GetHTMLString(),
+                WebSettings = { DefaultEncoding = "utf-8" },
             };
  
             var pdf = new HtmlToPdfDocument()
@@ -43,10 +43,10 @@ namespace GraduationGuideline.web.Controllers
                 GlobalSettings = globalSettings,
                 Objects = { objectSettings }
             };
+
+            var file = new FileStream("./Controllers/GS8.pdf", FileMode.Open);
  
-            var file = _converter.Convert(pdf);
- 
-            return File(file, "application/pdf");
+            return new FileStreamResult(file, "application/pdf");
         }
     }
 }
