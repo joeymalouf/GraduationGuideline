@@ -8,8 +8,6 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
 })
 export class NavMenuComponent {
   isExpanded = false;
-
-  steps = ["one", "two", "three"];
   
   collapse() {
     this.isExpanded = false;

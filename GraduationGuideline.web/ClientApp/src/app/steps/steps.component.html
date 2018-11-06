@@ -1,9 +1,109 @@
-<li *ngFor="let step of steps">
-    <a>
-        <span class='glyphicon glyphicon-education'></span> {{step}}
-    </a>
-</li>
+<div class="container row">
+    <li *ngFor="let step of steps">
+        <a>
+            <span class='glyphicon glyphicon-education'></span> {{step}}
+        </a>
+    </li>
 
-<a [routerLink]='["/gs8"]' (click)='collapse()'>
-    <span class='glyphicon glyphicon-education'></span> Steps
-</a>
+    <a [routerLink]='["/gs8"]' (click)='collapse()'>
+        <span class='glyphicon glyphicon-education'></span> Steps
+    </a>
+
+    <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td><div class="card">
+                <h5 class="card-header">Featured</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div></td>
+            <td><div class="card">
+                <h5 class="card-header">Featured</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div></td>
+            <td><div class="card">
+                <h5 class="card-header">Featured</h5>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div></td>
+          </tr>
+          <tr>
+            <td><div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div></td>
+            <td><div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div></td>
+            <td><div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
+
+    <div class="card">
+  <h5 class="card-header">Featured</h5>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<table class="table table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
