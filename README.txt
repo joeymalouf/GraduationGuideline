@@ -21,3 +21,14 @@ At this point pretty much all the tools I need (besides user authentication) are
 
 Problems Encountered:
 I'm not super familiar with Angular project files and setup, so I first had to learn how to setup new pages to get them to load. I realized by initial plan for navigation, dropdown within a dropdown, is unfriendly for mobile and had to come up with a new design. 
+
+Report 3
+
+Current Status:
+Completely changes the way PDFs worked. I am looking into PDF parsing as a better way to handle them. Updated bootstrap 3 to 4 and remade navigation. Made design decisions, not currently in code, about how I want certain pages to look. Created proper entities for each table of the database.
+
+Progress Made:
+Still need to code up most of the information on each page, fortunately this is a lot of copy, pasting, and editing of information from the grad school website. Draft for user manual and product implementation created.
+
+Problems Encountered:
+Updating bootstrap completely destroyed my navigation. I've fixed it for computer screens, but it's still being a pain for mobile viewing. 
