@@ -1,0 +1,10 @@
+<div class="footer-outer">
+    <div *ngFor="let step of steps" class="footer-idk">
+        <div class="footer-step" [ngClass]="(step.status) ? 'complete':'incomplete'">
+            {{step.stepName}}
+        </div>
+        <div class="footer-arrow">
+            <span class="fa fa-arrow-right"></span>
+        </div>
+    </div>
+</div>

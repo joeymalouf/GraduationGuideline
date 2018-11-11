@@ -1,0 +1,41 @@
+.footer-outer {
+    position: fixed;
+    width: calc(75% - 40px);
+    display: flex;
+}
+
+.footer-step {
+    display: flex;
+    float: left;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    text-align: center;
+    vertical-align: middle;
+    flex-grow: 1;
+    padding: 10px;
+    margin: 20px;
+}
+
+.footer-idk {
+    display: flex;
+    float: left;
+}
+
+.footer-arrow {
+    display: flex;
+    float: left;
+}
+
+.complete {
+    background-color: rgb(116, 221, 116);
+    border: 2px solid rgb(24, 192, 24);
+
+}
+
+.incomplete {
+    background-color: rgb(233, 89, 89);
+    border: 2px solid rgb(197, 31, 31);
+
+}

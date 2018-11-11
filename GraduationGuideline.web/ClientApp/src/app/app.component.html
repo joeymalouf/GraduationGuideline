@@ -4,7 +4,14 @@
       <app-nav-menu></app-nav-menu>
     </div>
     <div class='col-md-9 body-content'>
-      <router-outlet></router-outlet>
+      <div class="content-container">
+        <div>
+            <router-outlet></router-outlet>
+            <div class="content-footer">
+                <app-footer class="try"></app-footer>
+            </div>
+        </div>
+    </div>
     </div>
   </div>
 </div>
