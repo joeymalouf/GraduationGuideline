@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { TargetLocator } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,14 +8,20 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+  collapse = false;
   
-  collapse() {
-    this.isExpanded = false;
+  steps = ['one', 'two']
+
+  close() {
+    this.collapse = false;
     
   }
 
   toggle() {
-    this.isExpanded = !this.isExpanded;
+    this.collapse = !this.collapse;
+  }
+  
+  fold(target) {
+    
   }
 }

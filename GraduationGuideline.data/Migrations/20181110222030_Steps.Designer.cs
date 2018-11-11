@@ -2,15 +2,17 @@
 using GraduationGuideline.data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace GraduationGuideline.data.Migrations
 {
     [DbContext(typeof(GraduationGuidelineContext))]
-    partial class GraduationGuidelineContextModelSnapshot : ModelSnapshot
+    [Migration("20181110222030_Steps")]
+    partial class Steps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -10,7 +10,7 @@ namespace GraduationGuideline.data
     {
         // For migrations
         public GraduationGuidelineContext() 
-            : this(new DbContextOptionsBuilder<GraduationGuidelineContext>().UseNpgsql("User Id=GrdutionGuideline;Password=jubjub67;Host=localhost;Port=5432;Database=GraduationGuideline").Options) { }
+            : this(new DbContextOptionsBuilder<GraduationGuidelineContext>().UseNpgsql("User Id=GradutionGuideline;Password=jubjub67;Host=localhost;Port=5432;Database=GraduationGuideline").Options) { }
 
         // Inject in Startup
         public GraduationGuidelineContext(DbContextOptions<GraduationGuidelineContext> options) : base(options)
@@ -20,6 +20,7 @@ namespace GraduationGuideline.data
 
         
         public DbSet<UserEntity> User { get; set; }
+        public DbSet<StepEntity> Step { get; set; }
 
         public string ProviderName => base.Database.ProviderName;
 
@@ -36,6 +37,9 @@ namespace GraduationGuideline.data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UserEntity>().HasKey(m => m.Username);
+
+            builder.Entity<StepEntity>()
+                .HasOne(u => u.UserEntity);
 
             base.OnModelCreating(builder);
         }
