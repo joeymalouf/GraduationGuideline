@@ -12,6 +12,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { StepsComponent } from './steps/steps.component';
 import { Gs8Component } from './gs8/gs8.component';
 import { FooterComponent } from './footer/footer.component';
+import { DiplomaAppComponent } from './diplomaApp/diplomaApp.component';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     StepsComponent,
     Gs8Component,
     FooterComponent,
+    DiplomaAppComponent,
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +40,7 @@ import { FooterComponent } from './footer/footer.component';
       { path: 'footer', component: FooterComponent },      
       { path: 'GS8', component: Gs8Component },
       { path: 'DocSurvey', component: Gs8Component },
-      { path: 'DiplomaApp', component: Gs8Component },
+      { path: 'DiplomaApp', component: DiplomaAppComponent },
       { path: 'EtdInfo', component: Gs8Component },
       { path: 'EtdSubmit', component: Gs8Component },
       { path: 'Examination', component: Gs8Component },
