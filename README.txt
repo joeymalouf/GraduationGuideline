@@ -10,3 +10,25 @@ I went from having nothing to having a working environment I can begin coding in
 Problems Encountered:
 I originally wanted to use MySQL. The newer versions of dotnet core don't play well with it in my hands. After a few hours of reaching errors that were in parts of code not in my control, I gave up and restarted the data layer. I used postgresql on the restart and wasted much less time.
 I originally wanted to use Ole Miss's CSS for my project. I realize now that it makes much more sense to just use their colors and some of their layout ideas rather than dig through their CSS for what I do and don't need.
+
+Report 2
+
+Current Status:
+I created some of the navigation and started laying out the pages to be used. I edited some CSS in old files, the navigation menu, to better fit the theme. I added a package to use for PDF creation. I followed a guide to set up PDF creation ad made a test file that returned a new PDF. I began work on creating the forms I need.
+
+Progress Made:
+At this point pretty much all the tools I need (besides user authentication) are set up. Most of the coding from here should be straight forward and not fiddling with making new packages work in the project.
+
+Problems Encountered:
+I'm not super familiar with Angular project files and setup, so I first had to learn how to setup new pages to get them to load. I realized by initial plan for navigation, dropdown within a dropdown, is unfriendly for mobile and had to come up with a new design. 
+
+Report 3
+
+Current Status:
+Completely changes the way PDFs worked. I am looking into PDF parsing as a better way to handle them. Updated bootstrap 3 to 4 and remade navigation. Made design decisions, not currently in code, about how I want certain pages to look. Created proper entities for each table of the database.
+
+Progress Made:
+Still need to code up most of the information on each page, fortunately this is a lot of copy, pasting, and editing of information from the grad school website. Draft for user manual and product implementation created.
+
+Problems Encountered:
+Updating bootstrap completely destroyed my navigation. I've fixed it for computer screens, but it's still being a pain for mobile viewing. 
