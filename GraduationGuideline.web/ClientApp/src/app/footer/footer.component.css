@@ -1,31 +1,32 @@
+:host {
+    display: block;
+}
+
 .footer-outer {
-    position: fixed;
-    width: calc(75% - 40px);
     display: flex;
+    overflow-x: scroll;
 }
 
 .footer-step {
-    display: flex;
-    float: left;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-    text-align: center;
-    vertical-align: middle;
-    flex-grow: 1;
     padding: 10px;
-    margin: 20px;
+    margin: 10px;
 }
 
-.footer-idk {
+.footer-div {
     display: flex;
     float: left;
+    flex-grow: 1;
 }
 
 .footer-arrow {
     display: flex;
     float: left;
+    align-items: center;
+}
+
+.footer-arrow span {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .complete {

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace GraduationGuideline.data.entities
+namespace GraduationGuideline.domain.DataTransferObjects
 {
-    public class UserEntity
+    public class FullUserDto
     {
-        [Key]
         public string Username { get; set; }
         public string Password { get; set; }
         public string StudentType { get; set; }

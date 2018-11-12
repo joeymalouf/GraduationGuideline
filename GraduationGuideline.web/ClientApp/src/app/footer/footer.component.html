@@ -1,8 +1,8 @@
 <div class="footer-outer">
-    <div *ngFor="let step of steps" class="footer-idk">
-        <div class="footer-step" [ngClass]="(step.status) ? 'complete':'incomplete'">
+    <div *ngFor="let step of steps" class="footer-div">
+        <button class="btn footer-step" [ngClass]="(step.status) ? 'btn-success':'btn-danger'">
             {{step.stepName}}
-        </div>
+        </button>
         <div class="footer-arrow">
             <span class="fa fa-arrow-right"></span>
         </div>

@@ -6,7 +6,7 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
   host: {
-    "[style.display]": "'inline-block'",
+    "[style.display]": "'block'",
     "[style.width.%]": "100",
     "[style.height.%]": "100",
   },
@@ -15,6 +15,11 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
 
 export class FooterComponent {
   steps = [
+      { stepName: "Stuff1", status: true },
+      { stepName: "Stuff2", status: false },
+      { stepName: "Stuff3", status: true },
+      { stepName: "Stuff4", status: true },
+      { stepName: "Stuff5", status: false },
       { stepName: "Stuff1", status: true },
       { stepName: "Stuff2", status: false },
       { stepName: "Stuff3", status: true },

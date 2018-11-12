@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+  display: block;
+}
+
 .content-container {
     overflow: auto;
     font-family: verdana;
     font-size: 16px;
     font-weight: 200;
     position: fixed;
-    height: calc(100% - 40px);
     color: #000000;
     margin-top: 20px;
     background-color: #f1f4f5;
@@ -24,10 +27,6 @@
     border-bottom: 1px solid #c7c7c7;
     width: 100%;
     padding-bottom: 10px;
-  }
-  
-  .content-body {
-  
   }
   
   .content-footer {
