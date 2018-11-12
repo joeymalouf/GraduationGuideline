@@ -8,13 +8,14 @@ using GraduationGuideline.data;
 using GraduationGuideline.data.entities;
 using System.Collections.Generic;
 using GraduationGuideline.domain.DataTransferObjects;
+using GraduationGuideline.domain.interfaces;
 
 namespace GraduationGuideline.test.data
 {
     public class RepositoryTests
     {
         private GraduationGuidelineContext _graduationGuidelineContext;
-        private GraduationGuidelineOptimizerRepository repo = new GraduationGuidelineOptimizerRepository(new GraduationGuidelineContext());
+        private GraduationGuidelineRepository repo = new GraduationGuidelineRepository(new GraduationGuidelineContext());
 
         [Fact]
         public void CreateUserWorks()
@@ -109,7 +110,7 @@ namespace GraduationGuideline.test.data
             repo.RemoveUser(user.Username);
             var result = repo.GetUserByUsername("asdasdasd");
             //Then
-            Assert.Equal(result.Username, null);
+            Assert.Equal(result, null);
         }
 
         [Fact]

@@ -10,7 +10,6 @@ import { TargetLocator } from 'selenium-webdriver';
 export class NavMenuComponent {
   collapse = false;
   
-  steps = ['one', 'two']
 
   close() {
     this.collapse = false;

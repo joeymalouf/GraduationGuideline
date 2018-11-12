@@ -1,114 +1,15 @@
-<div class="container row">
-    <button type="button" class="btn btn-default btn-lg toggle-btn" data-target="#this" data-toggle="collapse">
-        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-</button>
-
-<div id="this">crap</div> 
-  <li *ngFor="let step of steps">
-        <a>
-            <span class='glyphicon glyphicon-education'></span> {{step}}
-        </a>
-    </li>
-
-    <a [routerLink]='["/gs8"]' (click)='collapse()'>
-        <span class='glyphicon glyphicon-education'></span> Steps
-    </a>
-
+<p *ngIf="!userSteps"><em>Loading...</em></p>
+<div *ngIf="userSteps">
     <table class="table table-borderless">
         <tbody>
-          <tr>
-            <td><div class="card">
-                <h5 class="card-header">Featured</h5>
+          <tr *ngFor="let row of userStepThrees">
+            <td *ngFor="let step of row"><div [routerLink]='["/", step.stepName]' class="card text-white mb-3" [ngClass]="(step.status) ? 'bg-success':'bg-danger'">
+                <h5 class="card-header">{{step.stepName}}</h5>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div></td>
-            <td><div class="card">
-                <h5 class="card-header">Featured</h5>
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div></td>
-            <td><div class="card">
-                <h5 class="card-header">Featured</h5>
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div></td>
-          </tr>
-          <tr>
-            <td><div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div></td>
-            <td><div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div></td>
-            <td><div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <p class="card-text">This is where a description will go.</p>
                 </div>
               </div></td>
           </tr>
         </tbody>
       </table>
-
-    <div class="card">
-  <h5 class="card-header">Featured</h5>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-<table class="table table-bordered table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
 </div>

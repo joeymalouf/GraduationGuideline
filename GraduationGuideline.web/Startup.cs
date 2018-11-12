@@ -28,9 +28,10 @@ namespace GraduationGuideline.web
         {
             services.AddDbContext<GraduationGuidelineContext>(options => options.UseNpgsql("User Id=GraduationGuideline;Password=jubjub67;Host=localhost;Port=5432;Database=GraduationGuideline"));
             services.AddTransient<IWeatherService, WeatherService>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+            services.AddTransient<IStepService, StepService>();
+            services.AddTransient<IRepository, GraduationGuidelineRepository>();
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

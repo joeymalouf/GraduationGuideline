@@ -1,6 +1,7 @@
-<div class="footer-outer">
-    <div *ngFor="let step of steps" class="footer-div">
-        <button class="btn footer-step" [ngClass]="(step.status) ? 'btn-success':'btn-danger'">
+<p *ngIf="!userSteps"><em>Loading...</em></p>
+<div *ngIf="userSteps" class="footer-outer">
+    <div *ngFor="let step of userSteps" class="footer-div">
+        <button  [routerLink]='["/", step.stepName]' class="btn footer-step" [ngClass]="(step.status) ? 'btn-success':'btn-danger'">
             {{step.stepName}}
         </button>
         <div class="footer-arrow">

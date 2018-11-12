@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { HttpClient } from '@angular/common/http';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-steps',
@@ -7,16 +9,31 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
   styleUrls: ['./steps.component.css']
 })
 export class StepsComponent {
-  isExpanded = false;
+  public userSteps: Steps[];
+  public userStepThrees = [];
 
-  steps = ["one", "two", "three"];
-  
-  collapse() {
-    this.isExpanded = false;
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    http.get<Steps[]>(baseUrl + 'api/Footer/GetStepsByUsername/jmmalouf').subscribe(result => {
+      this.userSteps = result;
+      if (this.userSteps) {
+        for (var i = 0; i < this.userSteps.length; i += 3) {
+          var step = this.userSteps[i];
+          var row = [];
+          row.push(this.userSteps[i])
+          while (row.length < 3 && i + row.length < this.userSteps.length) {
+            row.push(this.userSteps[i + row.length])
+          }
+          this.userStepThrees.push(row);
+        }
+      }
+    }, error => console.error(error));
+
     
   }
+}
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
+interface Steps {
+  username: string;
+  status: boolean;
+  stepName: string;
 }

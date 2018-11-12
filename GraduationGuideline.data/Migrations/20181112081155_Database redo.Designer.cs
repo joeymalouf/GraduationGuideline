@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GraduationGuideline.data.Migrations
 {
     [DbContext(typeof(GraduationGuidelineContext))]
-    [Migration("20181110222030_Steps")]
-    partial class Steps
+    [Migration("20181112081155_Database redo")]
+    partial class Databaseredo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,16 +22,13 @@ namespace GraduationGuideline.data.Migrations
 
             modelBuilder.Entity("GraduationGuideline.data.entities.StepEntity", b =>
                 {
-                    b.Property<string>("StepName")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Username");
+
+                    b.Property<string>("StepName");
 
                     b.Property<bool>("Status");
 
-                    b.Property<string>("Username");
-
-                    b.HasKey("StepName");
-
-                    b.HasIndex("Username");
+                    b.HasKey("Username", "StepName");
 
                     b.ToTable("Step");
                 });
@@ -61,8 +58,9 @@ namespace GraduationGuideline.data.Migrations
             modelBuilder.Entity("GraduationGuideline.data.entities.StepEntity", b =>
                 {
                     b.HasOne("GraduationGuideline.data.entities.UserEntity", "UserEntity")
-                        .WithMany("Steps")
-                        .HasForeignKey("Username");
+                        .WithMany()
+                        .HasForeignKey("Username")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

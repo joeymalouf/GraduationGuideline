@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-footer',
@@ -14,16 +15,17 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
 
 
 export class FooterComponent {
-  steps = [
-      { stepName: "Stuff1", status: true },
-      { stepName: "Stuff2", status: false },
-      { stepName: "Stuff3", status: true },
-      { stepName: "Stuff4", status: true },
-      { stepName: "Stuff5", status: false },
-      { stepName: "Stuff1", status: true },
-      { stepName: "Stuff2", status: false },
-      { stepName: "Stuff3", status: true },
-      { stepName: "Stuff4", status: true },
-      { stepName: "Stuff5", status: false },
-  ];
+  public userSteps: Steps[];
+
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    http.get<Steps[]>(baseUrl + 'api/Footer/GetStepsByUsername/jmmalouf').subscribe(result => {
+      this.userSteps = result;
+    }, error => console.error(error));
+  }
+}
+
+interface Steps {
+  username: string;
+  status: boolean;
+  stepName: string;
 }

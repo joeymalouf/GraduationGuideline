@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using GraduationGuideline.domain.contracts;
+using GraduationGuideline.domain.interfaces;
 using GraduationGuideline.domain.DataTransferObjects;
 using GraduationGuideline.data.entities;
 using System.Linq;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GraduationGuideline.data
 {
-    public class GraduationGuidelineOptimizerRepository : IRepository
+    public class GraduationGuidelineRepository : IRepository
     {
 
         private GraduationGuidelineContext _graduationGuidelineContext;
@@ -22,7 +22,7 @@ namespace GraduationGuideline.data
                 "Completion"
         };
 
-        public GraduationGuidelineOptimizerRepository(GraduationGuidelineContext graduationGuidelineContext)
+        public GraduationGuidelineRepository(GraduationGuidelineContext graduationGuidelineContext)
         {
             _graduationGuidelineContext = graduationGuidelineContext ?? throw new ArgumentNullException();
 
@@ -55,6 +55,10 @@ namespace GraduationGuideline.data
         public UserInfoDto GetUserByUsername(string username)
         {
             var result = _graduationGuidelineContext.User.SingleOrDefault(x => x.Username == username);
+
+            if (result == null){
+                return null;
+            }
             var user = new UserInfoDto {
                 Username = result.Username,
                 StudentType = result.StudentType,
@@ -105,6 +109,26 @@ namespace GraduationGuideline.data
 
         }
 
+        public void EditStepStatus(StepDto step) {
+            var Step = _graduationGuidelineContext.Step.SingleOrDefault(x => x.Username == step.Username && x.StepName == step.StepName);
+            Step.Status = step.Status;
+            _graduationGuidelineContext.Step.Update(Step);
+            _graduationGuidelineContext.SaveChanges();
+        }
+
+        public List<StepDto> GetStepsByUsername(String username){
+            var Steps = _graduationGuidelineContext.Step.Where(x => x.Username == username);
+            List<StepDto> steps = new List<StepDto>();
+            foreach (StepEntity step in Steps)
+            {
+                steps.Add( new StepDto {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status
+                });
+            }
+            return steps;
+        }
         public Task<UserInfoDto> GetUserInfoAsync(string username)
         {
             throw new NotImplementedException();

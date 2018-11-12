@@ -33,9 +33,19 @@ import { FooterComponent } from './footer/footer.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'steps', component: StepsComponent },
-      { path: 'gs8', component: Gs8Component },
-      { path: 'footer', component: FooterComponent },
-
+      { path: 'footer', component: FooterComponent },      
+      { path: 'GS8', component: Gs8Component },
+      { path: 'DocSurvey', component: Gs8Component },
+      { path: 'DiplomaApp', component: Gs8Component },
+      { path: 'EtdInfo', component: Gs8Component },
+      { path: 'EtdSubmit', component: Gs8Component },
+      { path: 'Examination', component: Gs8Component },
+      { path: 'FinalReport', component: Gs8Component },
+      { path: 'FinalVisit', component: Gs8Component },
+      { path: 'GraduationFee', component: Gs8Component },
+      { path: 'ProQuestFee', component: Gs8Component },
+      { path: 'ScheduleExam', component: Gs8Component },
+      
 
     ])
   ],
