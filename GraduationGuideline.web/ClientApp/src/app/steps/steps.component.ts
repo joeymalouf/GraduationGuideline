@@ -13,14 +13,14 @@ export class StepsComponent {
   public userStepThrees = [];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Steps[]>(baseUrl + 'api/Footer/GetStepsByUsername/jmmalouf').subscribe(result => {
+    http.get<Steps[]>(baseUrl + 'api/nav/GetStepsByUsername/jmmalouf').subscribe(result => {
       this.userSteps = result;
       if (this.userSteps) {
-        for (var i = 0; i < this.userSteps.length; i += 3) {
+        for (var i = 0; i < this.userSteps.length; i += 2) {
           var step = this.userSteps[i];
           var row = [];
           row.push(this.userSteps[i])
-          while (row.length < 3 && i + row.length < this.userSteps.length) {
+          while (row.length < 2 && i + row.length < this.userSteps.length) {
             row.push(this.userSteps[i + row.length])
           }
           this.userStepThrees.push(row);
@@ -36,4 +36,5 @@ interface Steps {
   username: string;
   status: boolean;
   stepName: string;
+  description: string;
 }

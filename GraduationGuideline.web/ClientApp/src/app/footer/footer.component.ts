@@ -18,7 +18,7 @@ export class FooterComponent {
   public userSteps: Steps[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Steps[]>(baseUrl + 'api/Footer/GetStepsByUsername/jmmalouf').subscribe(result => {
+    http.get<Steps[]>(baseUrl + 'api/nav/GetStepsByUsername/jmmalouf').subscribe(result => {
       this.userSteps = result;
     }, error => console.error(error));
   }

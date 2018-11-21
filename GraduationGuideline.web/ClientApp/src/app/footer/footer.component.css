@@ -5,6 +5,9 @@
 .footer-outer {
     display: flex;
     overflow-x: scroll;
+    margin-top: 20px;
+    background-color: #192a4d;
+    color: white;
 }
 
 .footer-step {
@@ -40,4 +43,11 @@
     background-color: rgb(233, 89, 89);
     border: 2px solid rgb(197, 31, 31);
 
+}
+
+
+@media (min-width: 767px) {
+    .footer-outer {
+        display: none;
+    }
 }

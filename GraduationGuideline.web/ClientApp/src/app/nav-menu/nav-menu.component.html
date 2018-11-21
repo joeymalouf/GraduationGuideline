@@ -1,24 +1,38 @@
 <div class="nav-side-menu">
   <div class="brand">Graduation Guideline</div>
-      
+
   <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
   <div class="menu-list">
 
     <ul id="menu-content" class="menu-content collapse">
 
-      <li class="active">
-        <a [routerLink]='["/"]' class="menu-item">Home</a>
+      <li data-toggle="collapse" data-target="#menu-content">
+        <a [routerLink]='["/"]'>Home</a>
       </li>
 
 
-      <li>
+      <li data-toggle="collapse" data-target="#menu-content">
         <a [routerLink]='["/account"]'>Account</a>
       </li>
 
-      <li>
+      <li data-toggle="collapse" data-target="#menu-content">
         <a [routerLink]='["/steps"]'>Steps</a>
       </li>
+
+      <div class="steps">
+        <p *ngIf="!userSteps"><em>Loading...</em></p>
+        <div *ngIf="userSteps">
+          <div *ngFor="let step of userSteps">
+            <li>
+              <a [routerLink]='["/", step.stepName]' class="step-link"><span class="step-name">{{step.stepName}}</span><i
+                  [ngClass]="(step.status) ? 'fa fa-check-circle complete' : 'fa fa-times-circle incomplete'"></i></a>
+            </li>
+          </div>
+        </div>
+      </div>
+
+
     </ul>
   </div>
 </div>

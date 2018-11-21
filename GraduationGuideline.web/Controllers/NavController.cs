@@ -9,16 +9,16 @@ using GraduationGuideline.domain.DataTransferObjects;
 
 namespace GraduationGuideline.web.Controllers
 {
-    public class FooterController : Controller
+    public class NavController : Controller
     {
         private IStepService _stepService;
-        public FooterController(IStepService stepService)
+        public NavController(IStepService stepService)
         {
             _stepService = stepService;
         }
 
         [HttpGet]
-        [Route("api/Footer/GetStepsByUsername/{username}")]
+        [Route("api/nav/GetStepsByUsername/{username}")]
         public List<StepDto> GetStepsByUsername(string username)
         {
             return this._stepService.GetStepsByUsername(username);

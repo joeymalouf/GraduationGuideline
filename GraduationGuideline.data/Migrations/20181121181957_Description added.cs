@@ -2,7 +2,7 @@
 
 namespace GraduationGuideline.data.Migrations
 {
-    public partial class Databaseredo : Migration
+    public partial class Descriptionadded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,8 @@ namespace GraduationGuideline.data.Migrations
                 {
                     StepName = table.Column<string>(nullable: false),
                     Status = table.Column<bool>(nullable: false),
-                    Username = table.Column<string>(nullable: false)
+                    Username = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -95,19 +95,19 @@ namespace GraduationGuideline.test.data
         public void DeleteUserWorks()
         {
             //Given
-            var user = new FullUserDto
-            {
-                Username = "asdasdasd",
-                Password = "yess",
-                StudentType = "PhD",
-                Email = "jmmalouf@go.olemiss.edu",
-                FirstName = "Joey",
-                LastName = "Malouf",
-                Admin = false
-            };
-            //When
-            repo.CreateUser(user);
-            repo.RemoveUser(user.Username);
+            // var user = new FullUserDto
+            // {
+            //     Username = "jmmalouf",
+            //     Password = "yess",
+            //     StudentType = "PhD",
+            //     Email = "jmmalouf@go.olemiss.edu",
+            //     FirstName = "Joey",
+            //     LastName = "Malouf",
+            //     Admin = false
+            // };
+            // //When
+            // repo.CreateUser(user);
+            repo.RemoveUser("jmmalouf");
             var result = repo.GetUserByUsername("asdasdasd");
             //Then
             Assert.Equal(result, null);

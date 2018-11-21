@@ -2,11 +2,11 @@
 <div *ngIf="userSteps">
     <table class="table table-borderless">
         <tbody>
-          <tr *ngFor="let row of userStepThrees">
+          <tr *ngFor="let row of userStepThrees" class="single-row-mobile">
             <td *ngFor="let step of row"><div [routerLink]='["/", step.stepName]' class="card text-white mb-3" [ngClass]="(step.status) ? 'bg-success':'bg-danger'">
                 <h5 class="card-header">{{step.stepName}}</h5>
                 <div class="card-body">
-                  <p class="card-text">This is where a description will go.</p>
+                  <p class="card-text">{{step.description}}</p>
                 </div>
               </div></td>
           </tr>

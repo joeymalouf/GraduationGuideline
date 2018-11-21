@@ -14,12 +14,31 @@ namespace GraduationGuideline.data
     {
 
         private GraduationGuidelineContext _graduationGuidelineContext;
+        
+        //names and description should  be matched by index
+        //make 2d array for it when time allows
         private String[] StepNames = new String[]{
-                "GS8", "DiplomaApp", "ScheduleExam",
-                "EtdInfo", "DocSurvey", "Examination",
-                "FinalReport", "FinalVisit", "EtdSubmit",
-                "Copyright", "ProQuestFee", "GraduationFee",
+                "GS8", "Diploma App", "Schedule Exam",
+                "ETD Info", "Survey of Earned Doctorates", "Thesis-Disseration and Exam",
+                "Report of Final Exam", "Final Visit", "Submit Thesis-Dissertation",
+                "Publishing and Copyright", "ProQuest Fee", "Graduation Fee",
                 "Completion"
+        };
+        private String [] StepDescriptions = new String[]{
+            "Complete a GS8, Application for Graduate Degree Form.",
+            "Complete an online Diploma Application. Email from registrar@olemiss.edu.",
+            "Complete A GS7 to schedule your final examination.",
+            "Obtain information about formatting and rights for your ETD.",
+            "Complete a Survey of Earned Doctorates.",
+            "Complete Thesis/Dissertation and Final Examination.",
+            "Your adviser or department chair must submit a Report of Final Examination.",
+            "Make a final trip tp the graduate school with completed forms.",
+            "Electronically Submit your Thesis/Dissertation.",
+            "Learn about and select your copyright binding options for yur work.",
+            "Pay fees to ProQuest to submit your thesis/dissertation.",
+            "Pay Graduation fee to the University of Mississipi.",
+            "Celebrate!"
+
         };
 
         public GraduationGuidelineRepository(GraduationGuidelineContext graduationGuidelineContext)
@@ -123,9 +142,9 @@ namespace GraduationGuideline.data
         public void CreateSteps(String username)
         {
 
-            foreach (String name in StepNames)
+            for(int i = 0; i < StepNames.Length; i++)
             {
-                StepEntity step = new StepEntity { Username = username, Status = false, StepName = name };
+                StepEntity step = new StepEntity { Username = username, Status = false, StepName = StepNames[i], Description = StepDescriptions[i] };
                 _graduationGuidelineContext.Step.Add(step);
             }
         }
@@ -159,7 +178,8 @@ namespace GraduationGuideline.data
                 {
                     Username = step.Username,
                     StepName = step.StepName,
-                    Status = step.Status
+                    Status = step.Status,
+                    Description = step.Description
                 });
             }
             return steps;

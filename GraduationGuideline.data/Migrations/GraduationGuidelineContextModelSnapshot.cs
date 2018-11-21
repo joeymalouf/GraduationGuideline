@@ -24,6 +24,8 @@ namespace GraduationGuideline.data.Migrations
 
                     b.Property<string>("StepName");
 
+                    b.Property<string>("Description");
+
                     b.Property<bool>("Status");
 
                     b.HasKey("Username", "StepName");

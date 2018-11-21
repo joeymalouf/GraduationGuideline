@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GraduationGuideline.data.Migrations
 {
     [DbContext(typeof(GraduationGuidelineContext))]
-    [Migration("20181112081155_Database redo")]
-    partial class Databaseredo
+    [Migration("20181121181957_Description added")]
+    partial class Descriptionadded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,8 @@ namespace GraduationGuideline.data.Migrations
                     b.Property<string>("Username");
 
                     b.Property<string>("StepName");
+
+                    b.Property<string>("Description");
 
                     b.Property<bool>("Status");
 

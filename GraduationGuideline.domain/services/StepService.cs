@@ -17,7 +17,33 @@ namespace GraduationGuideline.domain.services
 
         public List<StepDto> GetStepsByUsername(String username)
         {
-            return this._repository.GetStepsByUsername(username);
+            return SelectionSortByName(this._repository.GetStepsByUsername(username));
+        }
+
+        public List<StepDto> SelectionSortByName(List<StepDto> steps){
+
+            String[] StepNames = new String[]{
+                "GS8", "Diploma App", "Schedule Exam",
+                "ETD Info", "Survey of Earned Doctorates", "Thesis/Disseration and Exam",
+                "Report of Final Exam", "Final Visit", "Submit Thesis/Dissertation",
+                "Publishing and Copyright", "ProQuest Fee", "Graduation Fee",
+                "Completion"
+            };
+            //counter needed because lists may not be same size
+            //it keeps up with the current index in the DTO list
+
+            int counter = 0;
+            for(int i = 0; i < StepNames.Length; i++) {
+                for(int j = counter; j < steps.Count; j++) {
+                    if (steps[j].StepName == StepNames[i]){
+                        StepDto temp = steps[counter];
+                        steps[counter] = steps[j];
+                        steps[j] = temp;
+                        counter++;
+                    }
+                }
+            }
+            return steps;
         }
     }
 }
