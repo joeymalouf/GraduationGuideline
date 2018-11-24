@@ -10,5 +10,6 @@ namespace GraduationGuideline.domain.interfaces {
         void CreateUser(FullUserDto user);
         void CreateSteps(String username);
         List<StepDto> GetStepsByUsername(string username);
+        Task<StepDto> GetStepByKey(StepKeyDto stepKey);
     }
 }

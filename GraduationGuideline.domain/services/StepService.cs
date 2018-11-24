@@ -15,6 +15,16 @@ namespace GraduationGuideline.domain.services
             this._repository = _repository ?? throw new ArgumentNullException();
         }
 
+        public async Task<StepDto> GetStep(StepKeyDto stepKey)
+        {
+            if (stepKey.StepName == null || stepKey.Username == null){
+                throw new ArgumentException();
+            }
+            StepDto step = await _repository.GetStepByKey(stepKey).ConfigureAwait(false);
+
+            return step;
+        }
+
         public List<StepDto> GetStepsByUsername(String username)
         {
             return SelectionSortByName(this._repository.GetStepsByUsername(username));

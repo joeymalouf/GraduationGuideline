@@ -14,7 +14,7 @@ namespace GraduationGuideline.data
     {
 
         private GraduationGuidelineContext _graduationGuidelineContext;
-        
+
         //names and description should  be matched by index
         //make 2d array for it when time allows
         private String[] StepNames = new String[]{
@@ -24,7 +24,7 @@ namespace GraduationGuideline.data
                 "Publishing and Copyright", "ProQuest Fee", "Graduation Fee",
                 "Completion"
         };
-        private String [] StepDescriptions = new String[]{
+        private String[] StepDescriptions = new String[]{
             "Complete a GS8, Application for Graduate Degree Form.",
             "Complete an online Diploma Application. Email from registrar@olemiss.edu.",
             "Complete A GS7 to schedule your final examination.",
@@ -142,7 +142,7 @@ namespace GraduationGuideline.data
         public void CreateSteps(String username)
         {
 
-            for(int i = 0; i < StepNames.Length; i++)
+            for (int i = 0; i < StepNames.Length; i++)
             {
                 StepEntity step = new StepEntity { Username = username, Status = false, StepName = StepNames[i], Description = StepDescriptions[i] };
                 _graduationGuidelineContext.Step.Add(step);
@@ -187,6 +187,20 @@ namespace GraduationGuideline.data
         public Task<UserInfoDto> GetUserInfoAsync(string username)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<StepDto> GetStepByKey(StepKeyDto stepKey)
+        {
+            var step = await _graduationGuidelineContext.Step.SingleOrDefaultAsync(x => x.Username == stepKey.Username && x.StepName == stepKey.StepName).ConfigureAwait(false);
+
+            var Step = new StepDto{
+                Username = step.Username,
+                StepName = step.StepName,
+                Status = step.Status,
+                Description = step.Description
+            };
+
+            return Step;
         }
     }
 }
