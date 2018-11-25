@@ -11,6 +11,9 @@ using GraduationGuideline.data;
 using Microsoft.EntityFrameworkCore;
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GraduationGuideline.web
 {
@@ -29,15 +32,41 @@ namespace GraduationGuideline.web
             services.AddDbContext<GraduationGuidelineContext>(options => options.UseNpgsql("User Id=GraduationGuideline;Password=jubjub67;Host=localhost;Port=5432;Database=GraduationGuideline"));
             services.AddTransient<IWeatherService, WeatherService>();
             services.AddTransient<IStepService, StepService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAdminService, AdminService>();
+
+
             services.AddTransient<IRepository, GraduationGuidelineRepository>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = "https://localhost:5001",
+                    ValidAudience = "https://localhost:5001",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("GoodBeanJuiceTasteLikeChocolateMakeMeGoFast"))
+                };
+            });
+
+            services.AddCors(options => {
+                options.AddPolicy("EnableCORS", builders => {
+                    builders.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+                });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+                {
+                    configuration.RootPath = "ClientApp/dist";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +85,8 @@ namespace GraduationGuideline.web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseAuthentication();
+            app.UseCors("EnableCORS");
 
             app.UseMvc(routes =>
             {
@@ -66,10 +97,10 @@ namespace GraduationGuideline.web
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+        // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+        spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {

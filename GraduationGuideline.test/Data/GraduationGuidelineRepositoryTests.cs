@@ -54,7 +54,7 @@ namespace GraduationGuideline.test.data
             };
             //When
             //Then
-            Assert.Throws<ArgumentException>(() => repo.CreateUser(user));
+            Assert.ThrowsAsync<ArgumentException>(() => repo.CreateUser(user));
         }
 
         [Fact]
@@ -134,6 +134,38 @@ namespace GraduationGuideline.test.data
             //When
 
             //Then
+        }
+        [Fact]
+        public void LoginWorks()
+        {
+            //Given
+            var user = new LoginDto
+            {
+                Username = "joe",
+                Password = "idk"
+            };
+            var test = new UserInfoDto
+            {
+                Username = "joe",
+                FirstName = "j",
+                LastName = "m",
+                Admin = false,
+                StudentType = "PhD",
+                Email = "joey@c.com"
+            };
+
+            //When
+            var result = repo.Login(user);
+
+            //Then
+            Assert.Equal(result.Result.Username, test.Username);
+            Assert.Equal(result.Result.Admin, test.Admin);
+            Assert.Equal(result.Result.FirstName, test.FirstName);
+            Assert.Equal(result.Result.LastName, test.LastName);
+            Assert.Equal(result.Result.Email, test.Email);
+            Assert.Equal(result.Result.StudentType, test.StudentType);
+
+
         }
         [Fact]
         public void WeatherService_WeatherForecasts_ShouldReturnFiveItems()

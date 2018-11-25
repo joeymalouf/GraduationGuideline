@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraduationGuideline.domain.interfaces;
 using GraduationGuideline.domain.models;
 using GraduationGuideline.domain.DataTransferObjects;
+using System.Security.Claims;
 
 namespace GraduationGuideline.web.Controllers
 {
@@ -24,11 +25,20 @@ namespace GraduationGuideline.web.Controllers
             return this._stepService.GetStepsByUsername(username);
         }
 
-        [HttpPost]
-        [Route("api/step/GetStep")]
-        public async Task<ObjectResult> GetStep([FromBody] StepKeyDto step ){
-            
-            StepDto result = await this._stepService.GetStep(step);
+        [HttpGet]
+        [Route("api/step/GetCurrentUserSteps")]
+        public List<StepDto> GetCurrentUserSteps()
+        {
+            var username = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = this._stepService.GetStepsByUsername(username);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("api/step/GetStep/{stepName}")]
+        public async Task<ObjectResult> GetStep(string stepName){
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await this._stepService.GetStep(new StepKeyDto{Username = currentUser, StepName = stepName}).ConfigureAwait(false);
             return new OkObjectResult(result);
         }
     }

@@ -7,6 +7,8 @@ using GraduationGuideline.domain.DataTransferObjects;
 using GraduationGuideline.data.entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Text;
 
 namespace GraduationGuideline.data
 {
@@ -51,8 +53,17 @@ namespace GraduationGuideline.data
             _graduationGuidelineContext.Dispose();
         }
 
-        public void CreateUser(FullUserDto user)
+        public async Task<bool> CreateUser(FullUserDto user)
         {
+
+            user.Password = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: user.Password,
+                salt: Encoding.ASCII.GetBytes("skdnasd91231923ji!@#!009vsi=="),
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8)
+            );
+            
             if (_graduationGuidelineContext.User.SingleOrDefault(x => x.Username == user.Username) != null)
             {
                 throw new ArgumentException("User already exists");
@@ -71,11 +82,42 @@ namespace GraduationGuideline.data
             _graduationGuidelineContext.User.Add(u);
             this.CreateSteps(user.Username);
             _graduationGuidelineContext.SaveChanges();
+            if (_graduationGuidelineContext.User.SingleOrDefault(x => x.Username == user.Username) != null)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public List<UserWithStepsDto> GetAllUsersAndSteps()
+
+        public async Task<bool> CreateAccount(FullUserDto user)
         {
-            var result = _graduationGuidelineContext.User;
+
+
+            UserEntity User = new UserEntity
+            {
+                Username = user.Username,
+                Password = user.Password,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                StudentType = user.StudentType,
+                Email = user.Email,
+                Admin = user.Admin
+
+            };
+            
+
+            var result = await _graduationGuidelineContext.User.AddAsync(User).ConfigureAwait(false);
+            if (result.Entity == null)
+            {
+                return false;
+            }
+            _graduationGuidelineContext.SaveChanges();
+            return true;
+        }
+        public async Task<List<UserWithStepsDto>> GetAllUsersAndSteps()
+        {
+            var result = await _graduationGuidelineContext.User.ToListAsync().ConfigureAwait(false);
             List<UserWithStepsDto> users = new List<UserWithStepsDto>();
             foreach (UserEntity user in result)
             {
@@ -193,7 +235,8 @@ namespace GraduationGuideline.data
         {
             var step = await _graduationGuidelineContext.Step.SingleOrDefaultAsync(x => x.Username == stepKey.Username && x.StepName == stepKey.StepName).ConfigureAwait(false);
 
-            var Step = new StepDto{
+            var Step = new StepDto
+            {
                 Username = step.Username,
                 StepName = step.StepName,
                 Status = step.Status,
@@ -201,6 +244,33 @@ namespace GraduationGuideline.data
             };
 
             return Step;
+        }
+
+        public async Task<UserInfoDto> Login(LoginDto user)
+        {
+            user.Password = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: user.Password,
+                salt: Encoding.ASCII.GetBytes("skdnasd91231923ji!@#!009vsi=="),
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8)
+            );
+            
+            var User = await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username && x.Password == user.Password).ConfigureAwait(false);
+            
+            if (User.Username == "") {
+                throw new ArgumentException();
+            }
+            var UserInfo = new UserInfoDto {
+                Username = User.Username,
+                FirstName = User.FirstName,
+                LastName = User.LastName,
+                Admin = User.Admin,
+                StudentType = User.StudentType,
+                Email = User.Email  
+            };
+
+            return UserInfo;
         }
     }
 }

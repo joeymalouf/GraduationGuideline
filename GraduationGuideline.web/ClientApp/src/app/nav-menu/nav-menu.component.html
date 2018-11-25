@@ -31,8 +31,7 @@
           </div>
         </div>
       </div>
-
-
+      <li *ngIf="isUserAuthenticated()"><a (click)="logOut()">Logout</a></li>
     </ul>
   </div>
 </div>
