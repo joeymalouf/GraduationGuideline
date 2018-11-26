@@ -1,0 +1,20 @@
+<p *ngIf="!step"><em>Loading...</em></p>
+<div *ngIf="step">
+    <div class="content-header">
+        Electronically Submit Thesis/Dissertation
+    </div>
+    <div class="content-body">
+        <p></p>
+        <p>
+            <span class="keyword">Task:</span><br>Following the directions given in <a href="http://www.etdadmin.com/cgi-bin/main/submitting?siteId=330" target="_blank">
+            <strong>this link</strong></a>, electronically submit your completed thesis/dissertation into the ProQuest/UMI repository system. <strong>Before this submission is finalized (published)</strong>, the supervisor of graduate records will review the document for completeness and formatting. 
+            If revisions are needed, you will be contacted.
+        </p>
+        
+        <p *ngIf="unsetDate"><span class="keyword">Deadline:</span><br>This deadline has not been updated by an administrator</p>
+        <p *ngIf="!unsetDate"><span class="keyword">Deadline:</span><br>{{step.deadline | date:'MM/dd/yyyy'}}</p>
+        <p></p>
+        <p>The following two steps are part of this process and should be completed at the same time.</p>
+        <p><button (click)='toggleStatus()' [ngClass]="(step.status) ? 'btn btn-success' : 'btn btn-danger'">{{statusText}}</button></p>
+    </div>
+</div>

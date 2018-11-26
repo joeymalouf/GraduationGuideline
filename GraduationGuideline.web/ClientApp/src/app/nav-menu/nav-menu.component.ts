@@ -1,8 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
-import { TargetLocator } from 'selenium-webdriver';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { NavService } from '../services/navService.service';
 
@@ -14,7 +11,7 @@ import { NavService } from '../services/navService.service';
 export class NavMenuComponent {
   
 
-  constructor(private jwtHelper: JwtHelper, private router: Router, private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private _navService: NavService) {
+  constructor(private router: Router, private http: HttpClient, private _navService: NavService) {
 
     
   }

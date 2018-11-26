@@ -8,6 +8,7 @@ using GraduationGuideline.domain.interfaces;
 using Moq;
 using System.Collections.Generic;
 using GraduationGuideline.domain.DataTransferObjects;
+using System.Threading.Tasks;
 
 namespace GraduationGuideline.test.domain.services
 {
@@ -16,7 +17,7 @@ namespace GraduationGuideline.test.domain.services
 
 
         [Fact]
-        public void StepService_GetStepsByUser_ReturnsListOfSteps()
+        public async void StepService_GetStepsByUser_ReturnsListOfSteps()
         {
             // Arrange
             var mock = new Mock<IRepository>();
@@ -25,13 +26,12 @@ namespace GraduationGuideline.test.domain.services
                 new StepDto { StepName = "two", Status = false, Username = "jmmalouf" }
             };
 
-            mock.Setup(p => p.GetStepsByUsername("jmmaloof")).Returns(steps);
+            mock.Setup(p => p.GetStepsByUsername("jmmaloof")).Returns(Task.FromResult(steps));
             var target = new StepService(mock.Object);
 
 
             // Act
-            var data = target.GetStepsByUsername("jmmaloof");
-
+            var data = await target.GetStepsByUsername("jmmaloof").ConfigureAwait(false);
             // Assert
             Assert.Equal(data, steps);
         }

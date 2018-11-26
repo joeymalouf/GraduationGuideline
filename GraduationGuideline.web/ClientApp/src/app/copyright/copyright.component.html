@@ -1,0 +1,23 @@
+<p *ngIf="!step"><em>Loading...</em></p>
+<div *ngIf="step">
+    <div class="content-header">
+        Select Publishing, Copyright and Binding Options
+    </div>
+    <div class="content-body">
+        <p></p>
+        <div>
+            <span class="keyword">Task:</span><br><br>
+            <ul>
+            <li>While uploading your thesis/dissertation, you will be asked to select between the <a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/PublishingOptionsGuide.pdf" target="_blank">Traditional and Open Access Publishing</a> 
+                options. What you enter should correspond to the decision on the <a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/electronic_permission_form.pdf" target="_blank">ETD Rights and Permission Form</a>.</li><br>
+            <li>You will need to determine if you would like to register a copyright for your document, which is optional. Click <a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/CopyrightGuide_info.pdf" target="_blank">HERE</a> for more information.</li><br>
+            <li>You will have the opportunity to have ProQuest/UMI produce and mail to you bound copies of your thesis/dissertation during the online submission.<strong><em> *Note: The university no longer requires bound copies to be submitted to the Graduate School and University Libraries.</em></strong></li><br>
+            </ul>
+        </div>
+        <p *ngIf="unsetDate"><span class="keyword">Deadline:</span><br>This deadline has not been updated by an administrator</p>
+        <p *ngIf="!unsetDate"><span class="keyword">Deadline:</span><br>{{step.deadline | date:'MM/dd/yyyy'}}</p>
+
+        <p></p>
+        <p><button (click)='toggleStatus()' [ngClass]="(step.status) ? 'btn btn-success' : 'btn btn-danger'">{{statusText}}</button></p>
+    </div>
+</div>

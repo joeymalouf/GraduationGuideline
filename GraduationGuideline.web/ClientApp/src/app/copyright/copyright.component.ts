@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavService } from '../services/navService.service';
 
 @Component({
-  selector: 'app-gs8',
-  templateUrl: './gs8.component.html',
-  styleUrls: ['./gs8.component.css']
+  selector: 'app-copyright',
+  templateUrl: './copyright.component.html',
+  styleUrls: ['./copyright.component.css']
 })
 
 @Injectable()
-export class Gs8Component {
+export class CopyrightComponent {
   public step: Step;
   deadline: any;
   statusText = "Incomplete"
@@ -35,7 +35,7 @@ export class Gs8Component {
   }
 
   getStatus() {
-    this.http.get<Step>('api/step/GetStep/GS8', {
+    this.http.get<Step>('api/step/GetStep/Publishing and Copyright', {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + this.token,
         "Content-Type": "application/json"
@@ -52,7 +52,7 @@ export class Gs8Component {
   }
 
   toggleStatus() {
-    this.http.post<Step>('api/step/ToggleStepStatus/GS8', {}, {
+    this.http.post<Step>('api/step/ToggleStepStatus/Publishing and Copyright', {}, {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + this.token,
         "Content-Type": "application/json"

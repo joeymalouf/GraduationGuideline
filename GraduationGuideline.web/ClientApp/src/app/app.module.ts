@@ -18,6 +18,17 @@ import { LoginComponent } from './login/login.component';
 import { JwtHelper } from 'angular2-jwt';
 import { RegisterComponent } from './register/register.component';
 import { NavService } from './services/navService.service';
+import { ScheduleExamComponent } from './schedFinal/schedFinal.component';
+import { CelebrateComponent } from './celebrate/celebrate.component';
+import { DoctorateSurveyComponent } from './docSurvey/docSurvey.component';
+import { ElectronicSubmitComponent } from './elecSubmit/elecSubmit.component';
+import { EtdInfoComponent } from './EtdInfo/etdInfo.component';
+import { ThesisComponent } from './thesis/thesis.component';
+import { FinalReportComponent } from './finalReport/finalReport.component';
+import { FinalVisitComponent } from './finalVisit/finalVisit.component';
+import { CopyrightComponent } from './copyright/copyright.component';
+import { ProQuestComponent } from './proQuestFee/proQuest.component';
+import { GraduationFeeComponent } from './graduationFee/graduationFee.component';
 
 
 @NgModule({
@@ -33,6 +44,17 @@ import { NavService } from './services/navService.service';
     DiplomaAppComponent,
     LoginComponent,
     RegisterComponent,
+    ScheduleExamComponent,
+    CelebrateComponent,
+    DoctorateSurveyComponent,
+    ElectronicSubmitComponent,
+    EtdInfoComponent,
+    ThesisComponent,
+    FinalReportComponent,
+    FinalVisitComponent,
+    CopyrightComponent,
+    ProQuestComponent,
+    GraduationFeeComponent,
     
   ],
   imports: [
@@ -46,18 +68,18 @@ import { NavService } from './services/navService.service';
       { path: 'steps', component: StepsComponent, canActivate: [AuthGuard] },
       { path: 'footer', component: FooterComponent, canActivate: [AuthGuard] },      
       { path: 'GS8', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Survey of Earned Doctorates', component: Gs8Component, canActivate: [AuthGuard] },
+      { path: 'Survey of Earned Doctorates', component: DoctorateSurveyComponent, canActivate: [AuthGuard] },
       { path: 'Diploma App', component: DiplomaAppComponent, canActivate: [AuthGuard] },
-      { path: 'ETD Info', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Submit Thesis-Dissertation', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Thesis-Disseration and Exam', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Report of Final Exam', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Final Visit', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Graduation Fee', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'ProQuest Fee', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Schedule Exam', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Publishing and Copyright', component: Gs8Component, canActivate: [AuthGuard] },
-      { path: 'Completion', component: Gs8Component, canActivate: [AuthGuard] },
+      { path: 'ETD Info', component: EtdInfoComponent, canActivate: [AuthGuard] },
+      { path: 'Submit Thesis-Dissertation', component: ElectronicSubmitComponent, canActivate: [AuthGuard] },
+      { path: 'Thesis-Disseration and Exam', component: ThesisComponent, canActivate: [AuthGuard] },
+      { path: 'Report of Final Exam', component: FinalReportComponent, canActivate: [AuthGuard] },
+      { path: 'Final Visit', component: FinalVisitComponent, canActivate: [AuthGuard] },
+      { path: 'Graduation Fee', component: GraduationFeeComponent, canActivate: [AuthGuard] },
+      { path: 'ProQuest Fee', component: ProQuestComponent, canActivate: [AuthGuard] },
+      { path: 'Schedule Exam', component: ScheduleExamComponent, canActivate: [AuthGuard] },
+      { path: 'Publishing and Copyright', component: CopyrightComponent, canActivate: [AuthGuard] },
+      { path: 'Completion', component: CelebrateComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
 

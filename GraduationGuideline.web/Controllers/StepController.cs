@@ -16,19 +16,20 @@ namespace GraduationGuideline.web.Controllers
             _stepService = stepService;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("api/step/GetStepsByUsername/{username}")]
-        public List<StepDto> GetStepsByUsername(string username)
+        public async Task<ObjectResult> GetStepsByUsername(string username)
         {
-            return this._stepService.GetStepsByUsername(username);
+            var result = await this._stepService.GetStepsByUsername(username).ConfigureAwait(false);
+            return new OkObjectResult(result);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("api/step/GetCurrentUserSteps")]
-        public List<StepDto> GetCurrentUserSteps()
+        public async Task<List<StepDto>> GetCurrentUserSteps()
         {
             var username = HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            var result = this._stepService.GetStepsByUsername(username);
+            var result = await this._stepService.GetStepsByUsername(username).ConfigureAwait(false);
             return result;
         }
 
@@ -40,11 +41,20 @@ namespace GraduationGuideline.web.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("api/step/ToggleStepStatus/{stepName}")]
         public async Task<ObjectResult> ToggleStep(string stepName){
             var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var result = await this._stepService.ToggleStep(new StepKeyDto{Username = currentUser, StepName = stepName}).ConfigureAwait(false);
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet, Authorize]
+        [Route("api/step/GetDates")]
+        public async Task<ObjectResult> GetDates()
+        {
+            var username = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            var result = await this._stepService.GetDates(username).ConfigureAwait(false);
             return new OkObjectResult(result);
         }
     }

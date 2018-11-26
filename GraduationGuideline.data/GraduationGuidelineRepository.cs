@@ -64,7 +64,7 @@ namespace GraduationGuideline.data
                 numBytesRequested: 256 / 8)
             );
 
-            if (_graduationGuidelineContext.User.SingleOrDefault(x => x.Username == user.Username) != null)
+            if (await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username).ConfigureAwait(false) != null)
             {
                 throw new ArgumentException("User already exists");
             }
@@ -77,12 +77,14 @@ namespace GraduationGuideline.data
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Admin = user.Admin
+                Admin = user.Admin,
+                year = user.year,
+                Semester = user.Semester
             };
-            _graduationGuidelineContext.User.Add(u);
+            await _graduationGuidelineContext.User.AddAsync(u).ConfigureAwait(false);
             this.CreateSteps(user.Username);
-            _graduationGuidelineContext.SaveChanges();
-            if (_graduationGuidelineContext.User.SingleOrDefault(x => x.Username == user.Username) != null)
+            await _graduationGuidelineContext.SaveChangesAsync().ConfigureAwait(false);
+            if (await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username).ConfigureAwait(false) != null)
             {
                 return true;
             }
@@ -90,38 +92,13 @@ namespace GraduationGuideline.data
         }
 
 
-        public async Task<bool> CreateAccount(FullUserDto user)
-        {
-
-
-            UserEntity User = new UserEntity
-            {
-                Username = user.Username,
-                Password = user.Password,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                StudentType = user.StudentType,
-                Email = user.Email,
-                Admin = user.Admin
-
-            };
-
-
-            var result = await _graduationGuidelineContext.User.AddAsync(User).ConfigureAwait(false);
-            if (result.Entity == null)
-            {
-                return false;
-            }
-            _graduationGuidelineContext.SaveChanges();
-            return true;
-        }
         public async Task<List<UserWithStepsDto>> GetAllUsersAndSteps()
         {
             var result = await _graduationGuidelineContext.User.ToListAsync().ConfigureAwait(false);
             List<UserWithStepsDto> users = new List<UserWithStepsDto>();
             foreach (UserEntity user in result)
             {
-                var steps = this.GetStepsByUsername(user.Username);
+                var steps = await this.GetStepsByUsername(user.Username);
                 var u = new UserWithStepsDto
                 {
                     Username = user.Username,
@@ -214,9 +191,9 @@ namespace GraduationGuideline.data
             _graduationGuidelineContext.SaveChanges();
         }
 
-        public List<StepDto> GetStepsByUsername(String username)
+        public async Task<List<StepDto>> GetStepsByUsername(String username)
         {
-            var Steps = _graduationGuidelineContext.Step.Where(x => x.Username == username);
+            var Steps = await _graduationGuidelineContext.Step.Where(x => x.Username == username).ToListAsync().ConfigureAwait(false);
             List<StepDto> steps = new List<StepDto>();
             foreach (StepEntity step in Steps)
             {
@@ -244,7 +221,7 @@ namespace GraduationGuideline.data
                     StepName = step.StepName,
                     Status = step.Status,
                     Description = step.Description,
-                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).GS8,
+                    Deadline = _graduationGuidelineContext.Deadline.SingleOrDefault(x => x.Semester == user.Semester && x.year == user.year).GS8,
                 };
             }
             else if (step.StepName == "Schedule Exam")
@@ -255,7 +232,7 @@ namespace GraduationGuideline.data
                     StepName = step.StepName,
                     Status = step.Status,
                     Description = step.Description,
-                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalExam,
+                    Deadline = _graduationGuidelineContext.Deadline.SingleOrDefault(x => x.Semester == user.Semester && x.year == user.year).FinalExam,
 
                 };
             }
@@ -380,7 +357,9 @@ namespace GraduationGuideline.data
                 LastName = User.LastName,
                 Admin = User.Admin,
                 StudentType = User.StudentType,
-                Email = User.Email
+                Email = User.Email,
+                Semester = User.Semester,
+                year = User.year
             };
 
             return UserInfo;
@@ -393,15 +372,133 @@ namespace GraduationGuideline.data
             step.Status = !step.Status;
             _graduationGuidelineContext.Step.Update(step);
             await _graduationGuidelineContext.SaveChangesAsync().ConfigureAwait(false);
+            var result = await GetStepByKey(stepKey).ConfigureAwait(false);
             var Step = new StepDto
             {
-                Username = step.Username,
-                StepName = step.StepName,
-                Status = step.Status,
-                Description = step.Description
+                Username = result.Username,
+                StepName = result.StepName,
+                Status = result.Status,
+                Description = result.Description,
+                Deadline = result.Deadline
             };
 
             return Step;
+        }
+
+        public async Task CreateDeadline(DeadlineDto deadline)
+        {
+            var Deadline = new DeadlineEntity
+            {
+                Semester = deadline.Semester,
+                year = deadline.year,
+                GS8 = deadline.GS8,
+                ProQuest = deadline.ProQuest,
+                FinalExam = deadline.FinalExam,
+                FinalVisit = deadline.FinalVisit,
+                Survey = deadline.Survey,
+                Graduation = deadline.Graduation,
+                Commencement = deadline.Commencement,
+                Hooding = deadline.Hooding,
+                Audit = deadline.Audit,
+            };
+            await _graduationGuidelineContext.Deadline.AddAsync(Deadline).ConfigureAwait(false);
+            await _graduationGuidelineContext.SaveChangesAsync().ConfigureAwait(false);
+
+        }
+
+        public async Task EditDeadline(DeadlineDto deadline)
+        {
+
+            var Deadline = new DeadlineEntity
+            {
+                Semester = deadline.Semester,
+                year = deadline.year,
+                GS8 = deadline.GS8,
+                ProQuest = deadline.ProQuest,
+                FinalVisit = deadline.FinalVisit,
+                FinalExam = deadline.FinalExam,
+                Survey = deadline.Survey,
+                Graduation = deadline.Graduation,
+                Commencement = deadline.Commencement,
+                Hooding = deadline.Hooding,
+                Audit = deadline.Audit,
+            };
+
+            _graduationGuidelineContext.Deadline.Update(Deadline);
+            await _graduationGuidelineContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task DeleteDeadline(DeadlineKeyDto deadline)
+        {
+
+            var result = await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.year == deadline.year && x.Semester == deadline.Semester).ConfigureAwait(false);
+            _graduationGuidelineContext.Remove(result);
+            await _graduationGuidelineContext.SaveChangesAsync().ConfigureAwait(false);
+        }
+
+        public async Task<DeadlineDto> GetDeadline(DeadlineKeyDto deadline)
+        {
+            var result = await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.year == deadline.year && x.Semester == deadline.Semester).ConfigureAwait(false);
+            var Deadline = new DeadlineDto
+            {
+                Semester = result.Semester,
+                year = result.year,
+                GS8 = result.GS8,
+                ProQuest = result.ProQuest,
+                FinalVisit = result.FinalVisit,
+                FinalExam = result.FinalExam,
+                Survey = result.Survey,
+                Graduation = result.Graduation,
+                Commencement = result.Commencement,
+                Hooding = result.Hooding,
+                Audit = result.Audit,
+            };
+            return Deadline;
+        }
+
+        public async Task<List<DeadlineDto>> GetAllDeadlines()
+        {
+            var result = await _graduationGuidelineContext.Deadline.ToListAsync().ConfigureAwait(false);
+            List<DeadlineDto> deadlines = new List<DeadlineDto>();
+            foreach (DeadlineEntity deadline in result)
+            {
+                var Deadline = new DeadlineDto
+                {
+                    Semester = deadline.Semester,
+                    year = deadline.year,
+                    GS8 = deadline.GS8,
+                    ProQuest = deadline.ProQuest,
+                    FinalVisit = deadline.FinalVisit,
+                    FinalExam = deadline.FinalExam,
+                    Survey = deadline.Survey,
+                    Graduation = deadline.Graduation,
+                    Commencement = deadline.Commencement,
+                    Hooding = deadline.Hooding,
+                    Audit = deadline.Audit,
+                };
+                deadlines.Add(Deadline);
+            }
+            return deadlines;
+        }
+
+        public async Task<DeadlineDto> GetDates(string semester, int year)
+        {
+            var deadline = await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == semester && x.year == year).ConfigureAwait(false);
+            var Deadline = new DeadlineDto
+                {
+                    Semester = deadline.Semester,
+                    year = deadline.year,
+                    GS8 = deadline.GS8,
+                    ProQuest = deadline.ProQuest,
+                    FinalVisit = deadline.FinalVisit,
+                    FinalExam = deadline.FinalExam,
+                    Survey = deadline.Survey,
+                    Graduation = deadline.Graduation,
+                    Commencement = deadline.Commencement,
+                    Hooding = deadline.Hooding,
+                    Audit = deadline.Audit,
+                };
+            return Deadline;
         }
     }
 }

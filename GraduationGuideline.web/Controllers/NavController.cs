@@ -18,9 +18,10 @@ namespace GraduationGuideline.web.Controllers
 
         [HttpGet]
         [Route("api/nav/GetStepsByUsername/{username}")]
-        public List<StepDto> GetStepsByUsername(string username)
+        public async Task<ObjectResult> GetStepsByUsername(string username)
         {
-            return this._stepService.GetStepsByUsername(username);
+            var result = await this._stepService.GetStepsByUsername(username).ConfigureAwait(false);
+            return new OkObjectResult(result);
         }
     }
 }

@@ -20,5 +20,9 @@ namespace GraduationGuideline.domain.services
             var result = await this._repository.GetAllUsersAndSteps().ConfigureAwait(false);
             return result;
         }
+
+        public async Task CreateDeadline(DeadlineDto deadline){
+            await this._repository.CreateDeadline(deadline).ConfigureAwait(false);  
+        }
     }
 }

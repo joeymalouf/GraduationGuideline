@@ -1,0 +1,24 @@
+<p *ngIf="!step"><em>Loading...</em></p>
+<div *ngIf="step">
+    <div class="content-header">
+        Electronic Thesis/Dissertation Information
+    </div>
+    <div class="content-body">
+        <p></p>
+        <div>
+            <span class="keyword">Task:</span><br> <strong>Obtain information about <a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/UMI_PreparingYourManuscriptGuide.pdf" target="_blank">formatting</a> and <a href="http://www.etdadmin.com/cgi-bin/main/submitting?siteId=330" target="_blank">uploading</a> an ETD and the <a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/electronic_permission_form.pdf" target="_blank">ETD Rights, Permission and Contact Form</a>.</strong>
+            <br><strong>***FAQs regarding FORMATTING can be found&nbsp;<a href="https://support.proquest.com/#articledetail?id=kA11W000000PEa5SAG">HERE</a>*** </strong>It is the student’s responsibility to:<p></p>
+            <ul>
+            <li>Become familiar with the<a href="https://gradschool.olemiss.edu/thesis-and-dissertation-manual/" target="_blank"> formatting of a thesis/dissertation</a> (click<a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/Theses-and-Dissertations-Manual_final.pdf" target="_blank"><strong>&nbsp;HERE</strong></a> for a PDF version of the manual)</li><br>
+            <li>Create an account on<em> ProQuest/UMI</em> – click <a href="https://secure.etdadmin.com/cgi-bin/etdadmin_login?form=etdadmin&amp;request_uri=http%3A//www.etdadmin.com/cgi-bin/student/etd" target="_blank"><strong>HERE</strong></a></li><br>
+            <li>Learn how to <a href="http://www.etdadmin.com/cgi-bin/main/submitting?siteId=330" target="_blank">electronically upload</a> a thesis/dissertation (an ETD) into the online ProQuest/UMI system.</li><br>
+            <li>In addition, please obtain an <a href="https://gradschool.wp.olemiss.edu/wp-content/uploads/sites/36/2013/10/electronic_permission_form.pdf" target="_blank">ETD Rights, Permission and Contact Form</a> and confer with your adviser about its content.</li>
+            </ul>
+        </div>
+        <p *ngIf="unsetDate"><span class="keyword">Deadline:</span><br>This deadline has not been updated by an administrator</p>
+        <p *ngIf="!unsetDate"><span class="keyword">Deadline:</span><br>{{step.deadline | date:'MM/dd/yyyy'}}</p>
+    
+        <p></p>
+        <p><button (click)='toggleStatus()' [ngClass]="(step.status) ? 'btn btn-success' : 'btn btn-danger'">{{statusText}}</button></p>
+    </div>
+</div>

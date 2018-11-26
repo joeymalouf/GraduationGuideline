@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavService } from '../services/navService.service';
 
 @Component({
-  selector: 'app-gs8',
-  templateUrl: './gs8.component.html',
-  styleUrls: ['./gs8.component.css']
+  selector: 'app-proQuest',
+  templateUrl: './proQuest.component.html',
+  styleUrls: ['./proQuest.component.css']
 })
 
 @Injectable()
-export class Gs8Component {
+export class ProQuestComponent {
   public step: Step;
   deadline: any;
   statusText = "Incomplete"
@@ -35,7 +35,7 @@ export class Gs8Component {
   }
 
   getStatus() {
-    this.http.get<Step>('api/step/GetStep/GS8', {
+    this.http.get<Step>('api/step/GetStep/ProQuest Fee', {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + this.token,
         "Content-Type": "application/json"
@@ -52,7 +52,7 @@ export class Gs8Component {
   }
 
   toggleStatus() {
-    this.http.post<Step>('api/step/ToggleStepStatus/GS8', {}, {
+    this.http.post<Step>('api/step/ToggleStepStatus/ProQuest Fee', {}, {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + this.token,
         "Content-Type": "application/json"

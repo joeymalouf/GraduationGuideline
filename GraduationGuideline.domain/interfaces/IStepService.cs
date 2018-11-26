@@ -7,8 +7,9 @@ namespace GraduationGuideline.domain.interfaces
 {
     public interface IStepService
     {
-        List<StepDto> GetStepsByUsername(string username);
+        Task<List<StepDto>> GetStepsByUsername(string username);
         Task<StepDto> GetStep(StepKeyDto step);
         Task<StepDto> ToggleStep(StepKeyDto step);
+        Task<DeadlineDto> GetDates(string username);
     }
 }

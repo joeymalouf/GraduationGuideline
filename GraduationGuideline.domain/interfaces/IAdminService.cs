@@ -8,5 +8,6 @@ namespace GraduationGuideline.domain.interfaces
     public interface IAdminService
     {
         Task<List<UserWithStepsDto>> GetallUserData();
+        Task CreateDeadline(DeadlineDto deadline);
     }
 }

@@ -1,0 +1,27 @@
+<p *ngIf="!step"><em>Loading...</em></p>
+<div *ngIf="step">
+    <div class="content-header">
+        Congratulations!
+    </div>
+    <div class="content-body">
+        <p></p>
+        <p>
+            If you have completed all previous steps and have successfully passed all required courses (e.g., can pass
+            a degree audit for your program)
+            during your final semester, then you will be certified by the Graduate School and Registrar’s Office for
+            graduation. You may officially graduate at the end of a December,
+            May or August semester. A commencement ceremony, including a doctoral hooding ceremony for doctoral
+            graduates, is held only in May.
+            The process of mailing diplomas will begin approximately 8 weeks after each graduation date.
+            If you wish to participate in a commencement and/or hooding ceremony, you will need to rent regalia.
+        </p>
+        <div *ngIf="deadline">
+            <p *ngIf="deadline.graduation"><span class="keyword">Graduation Date:</span><br>{{deadline.graduation | date:'MM/dd/yyyy'}}</p>
+            <p *ngIf="deadline.commencement"><span class="keyword">Commencement Ceremony:</span><br>{{deadline.commencement | date:'MM/dd/yyyy'}}</p>
+            <p *ngIf="deadline.hooding"><span class="keyword">Doctoral Hooding Ceremony:</span><br>{{deadline.hooding | date:'MM/dd/yyyy'}}</p>
+            <p *ngIf="deadline.audit"><span class="keyword">Graduation Audit/Degrees Submitted to the Registrar:</span><br>{{deadline.audit | date:'MM/dd/yyyy'}}</p>
+        </div>
+        <p></p>
+        <p><button (click)='toggleStatus()' [ngClass]="(step.status) ? 'btn btn-success' : 'btn btn-danger'">{{statusText}}</button></p>
+    </div>
+</div>

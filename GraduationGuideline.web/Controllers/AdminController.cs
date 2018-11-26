@@ -23,5 +23,11 @@ namespace GraduationGuideline.web.Controllers
             var result = await this._adminService.GetallUserData();
             return new OkObjectResult(result);   
         }
+        [HttpGet, Authorize(Roles = "Admin")]
+        [Route("api/[controller]/CreateDeadline")]
+        public async Task<IActionResult> CreateDeadline([FromBody] DeadlineDto deadline) {
+            await this._adminService.CreateDeadline(deadline).ConfigureAwait(false);
+            return new OkResult();   
+        }
     }
 }
