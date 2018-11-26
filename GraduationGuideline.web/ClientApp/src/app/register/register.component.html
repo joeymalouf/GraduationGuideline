@@ -1,16 +1,87 @@
-<form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-    <div class="container-fluid">
-        <h2 class="form-signin-heading">Register</h2>
-        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password.</div>
-        <br />
-        <label for="username" class="sr-only">Username</label>
-        <input type="email" id="username" name="username" ngModel class="form-control" placeholder="User Name" required
-            autofocus>
-        <br />
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Password"
-            required>
-        <br />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Register Account</h3>
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="form-group">
+                    <label for="Username">Username</label>
+                    <input type="text" class="form-control" name="Username" [(ngModel)]="model.Username" #Username="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && Username.invalid }" required />
+                    <div *ngIf="f.submitted && Username.invalid" class="invalid-feedback">
+                        <div *ngIf="Username.errors.required">Username is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="FirstName">First Name</label>
+                    <input type="text" class="form-control" name="FirstName" [(ngModel)]="model.FirstName" #FirstName="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && FirstName.invalid }" required />
+                    <div *ngIf="f.submitted && FirstName.invalid" class="invalid-feedback">
+                        <div *ngIf="FirstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="LastName">Last Name</label>
+                    <input type="text" class="form-control" name="LastName" [(ngModel)]="model.LastName" #LastName="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && LastName.invalid }" required />
+                    <div *ngIf="f.submitted && LastName.invalid" class="invalid-feedback">
+                        <div *ngIf="LastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="text" class="form-control" name="Email" [(ngModel)]="model.Email" #Email="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }" required email />
+                    <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
+                        <div *ngIf="Email.errors.required">Email is required</div>
+                        <div *ngIf="Email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="StudentType">Student Type</label>
+                    <select class="form-control" [(ngModel)]="model.StudentType" name="StudentType" #StudentType="ngModel">
+                        <option *ngFor="let x of types" value={{x}}>
+                            {{x}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Graduating Year</label>
+                    <select class="form-control" [(ngModel)]="model.year" name="year" #studentType="ngModel">
+                        <option *ngFor="let x of years" value={{x}}>
+                            {{x}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Semester">Semester</label>
+                    <select class="form-control" [(ngModel)]="model.Semester" name="Semester" #studentType="ngModel">
+                        <option *ngFor="let x of semesters" value={{x}}>
+                            {{x}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="model.Password" #password="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="8" />
+                    <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordConfirm">Confirm Password</label>
+                    <input type="password" class="form-control" name="passwordConfirm" [(ngModel)]="confirm"
+                        #passwordConfirm="ngModel" [ngClass]="{ 'is-invalid': f.submitted && passwordConfirm.invalid, 'is-invalid': mismatch }"
+                        required minlength="8" />
+                    <div *ngIf="mismatch" class="invalid-feedback">
+                        <div>Password's must match</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
+</div>

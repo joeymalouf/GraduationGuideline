@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,6 +14,8 @@ namespace GraduationGuideline.data.entities
         public string FirstName { get; set;}
         public string LastName { get; set; }
         public bool Admin { get; set; }
+        public string Semester { get; set; }
+        public int year { get; set; }
 
     }
 }

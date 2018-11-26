@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'register',
@@ -10,23 +8,32 @@ import { NgForm } from '@angular/forms';
 export class RegisterComponent {
     invalidInfo: boolean;
 
-    constructor(private router: Router, private http: HttpClient) { }
+    constructor (private http: HttpClient)  { }
+    model: any = {};
+    public confirm: string = "";
+    public mismatch: boolean = false;
+    public types = ["PhD", "Master's Thesis", "Master's Nonthesis"]
+    public years = Array.from(Array(23).keys()).map(i => 2018 + i);
+    public semesters = ["Spring", "Fall", "Summer"]
 
 
-    register(form: NgForm) {
-        let credentials = JSON.stringify(form.value);
-        this.http.post("https://localhost:5001/api/account/register", credentials, {
-            headers: new HttpHeaders({
-                "Content-Type": "application/json"
-            })
-        }).subscribe(response => {
-            let token = (<any>response).token;
-            localStorage.setItem("jwt", token);
-            this.invalidInfo = false;
-            this.router.navigate(["/"]);
-        }, err => {
-            this.invalidInfo = true;
-        });
+    onSubmit() {
+        if (this.model.Password == this.confirm) {
+            this.mismatch = false;
+            this.http.post("/api/auth/create", JSON.stringify(this.model), {
+                headers: new HttpHeaders({
+                    "Content-Type": "application/json"
+                })
+            }).subscribe(response => {
+                this.invalidInfo = false;
+                window.location.href= "https://localhost:5001/login";
+            }, err => {
+                this.invalidInfo = true;
+            });
+
+        }
+        else {
+            this.mismatch = true;
+        }
     }
-    
 }

@@ -1,5 +1,5 @@
-<p *ngIf="!userSteps"><em>Loading...</em></p>
-<div *ngIf="userSteps">
+<p *ngIf="!_navService.steps"><em>Loading...</em></p>
+<div *ngIf="_navService.steps">
     <table class="table table-borderless">
         <tbody>
           <tr *ngFor="let row of userStepThrees" class="single-row-mobile">

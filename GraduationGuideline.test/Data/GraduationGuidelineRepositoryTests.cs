@@ -18,7 +18,7 @@ namespace GraduationGuideline.test.data
         private GraduationGuidelineRepository repo = new GraduationGuidelineRepository(new GraduationGuidelineContext());
 
         [Fact]
-        public void CreateUserWorks()
+        public async void CreateUserWorks()
         {
             //Given
             var user = new FullUserDto
@@ -32,8 +32,8 @@ namespace GraduationGuideline.test.data
                 Admin = false
             };
             //When
-            repo.CreateUser(user);
-            var result = repo.GetUserByUsername("jmmalouf");
+            await repo.CreateUser(user).ConfigureAwait(false);
+            var result = await repo.GetUserByUsername("jmmalouf").ConfigureAwait(false);
             //Then
             Assert.Equal(result.Username, user.Username);
         }
@@ -50,7 +50,9 @@ namespace GraduationGuideline.test.data
                 Email = "jmmalouf@go.olemiss.edu",
                 FirstName = "Joey",
                 LastName = "Malouf",
-                Admin = false
+                Admin = false,
+                Semester = "Fall",
+                year = 2019
             };
             //When
             //Then
@@ -58,7 +60,7 @@ namespace GraduationGuideline.test.data
         }
 
         [Fact]
-        public void EditUserWorks()
+        public async void EditUserWorks()
         {
             //Given
             var user = new FullUserDto
@@ -69,9 +71,11 @@ namespace GraduationGuideline.test.data
                 Email = "jmmalouf@go.olemiss.edu",
                 FirstName = "Joey",
                 LastName = "Malouf",
-                Admin = false
+                Admin = false,
+                Semester = "Fall",
+                year = 2019
             };
-            repo.CreateUser(user);
+            await repo.CreateUser(user).ConfigureAwait(false);
 
             var userEdit = new UserInfoDto
             {
@@ -80,11 +84,13 @@ namespace GraduationGuideline.test.data
                 Email = "jmmalouf@go.olemiss.edu",
                 FirstName = "Joey",
                 LastName = "Malouf",
-                Admin = false
+                Admin = false,
+                Semester = "Fall",
+                year = 2019
             };
             //When
             repo.EditUser(userEdit);
-            var result = repo.GetUserByUsername("jmmalouf");
+            var result = await repo.GetUserByUsername("jmmalouf").ConfigureAwait(false);
 
             //Then
             Assert.Equal(result.StudentType, "MasterT");
@@ -129,7 +135,9 @@ namespace GraduationGuideline.test.data
                 Email = "jmmalouf@go.olemiss.edu",
                 FirstName = "Joey",
                 LastName = "Malouf",
-                Admin = false
+                Admin = false,
+                Semester = "Fall",
+                year = 2019
             };
             //When
 
@@ -151,7 +159,9 @@ namespace GraduationGuideline.test.data
                 LastName = "m",
                 Admin = false,
                 StudentType = "PhD",
-                Email = "joey@c.com"
+                Email = "joey@c.com",
+                Semester = "Fall",
+                year = 2019
             };
 
             //When

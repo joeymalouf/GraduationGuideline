@@ -9,5 +9,6 @@ namespace GraduationGuideline.domain.interfaces
     {
         List<StepDto> GetStepsByUsername(string username);
         Task<StepDto> GetStep(StepKeyDto step);
+        Task<StepDto> ToggleStep(StepKeyDto step);
     }
 }

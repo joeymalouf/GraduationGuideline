@@ -1,6 +1,6 @@
-<p *ngIf="!userSteps"><em>Loading...</em></p>
-<div *ngIf="userSteps" class="footer-outer">
-    <div *ngFor="let step of userSteps" class="footer-div">
+<p *ngIf="!_navService.steps"><em>Loading...</em></p>
+<div *ngIf="_navService.steps" class="footer-outer">
+    <div *ngFor="let step of _navService.steps" class="footer-div">
         <button  [routerLink]='["/", step.stepName]' class="btn footer-step" [ngClass]="(step.status) ? 'btn-success':'btn-danger'">
             {{step.stepName}}
         </button>

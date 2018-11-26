@@ -16,6 +16,10 @@ export class AppComponent {
   constructor(private jwtHelper: JwtHelper, private router: Router) {
   }
 
+  ngOnInit() {
+    this.isUserAuthenticated();
+  }
+
   isUserAuthenticated() {
     let token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {

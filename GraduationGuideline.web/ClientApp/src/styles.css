@@ -37,6 +37,11 @@ body, html {
   .remove-padding {
     padding-left: 0px !important;
   }
+
+  .col-md-6-important {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
   
   @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
@@ -54,5 +59,9 @@ body, html {
     .remove-padding {
       padding-right: 0px !important;
       padding-left: 0px !important;
+    }
+    .col-md-6-important {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
     }
   }

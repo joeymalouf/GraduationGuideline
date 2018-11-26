@@ -55,5 +55,15 @@ namespace GraduationGuideline.domain.services
             }
             return steps;
         }
+
+        public async Task<StepDto> ToggleStep(StepKeyDto stepKey)
+        {
+            if (stepKey.StepName == null || stepKey.Username == null){
+                throw new ArgumentException();
+            }
+            StepDto step = await _repository.ToggleStep(stepKey).ConfigureAwait(false);
+
+            return step;
+        }
     }
 }

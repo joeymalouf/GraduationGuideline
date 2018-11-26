@@ -63,7 +63,7 @@ namespace GraduationGuideline.data
                 iterationCount: 10000,
                 numBytesRequested: 256 / 8)
             );
-            
+
             if (_graduationGuidelineContext.User.SingleOrDefault(x => x.Username == user.Username) != null)
             {
                 throw new ArgumentException("User already exists");
@@ -105,7 +105,7 @@ namespace GraduationGuideline.data
                 Admin = user.Admin
 
             };
-            
+
 
             var result = await _graduationGuidelineContext.User.AddAsync(User).ConfigureAwait(false);
             if (result.Entity == null)
@@ -137,9 +137,9 @@ namespace GraduationGuideline.data
             return users;
 
         }
-        public UserInfoDto GetUserByUsername(string username)
+        public async Task<UserInfoDto> GetUserByUsername(string username)
         {
-            var result = _graduationGuidelineContext.User.SingleOrDefault(x => x.Username == username);
+            var result = await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == username).ConfigureAwait(false);
 
             if (result == null)
             {
@@ -152,7 +152,9 @@ namespace GraduationGuideline.data
                 Email = result.Email,
                 FirstName = result.FirstName,
                 LastName = result.LastName,
-                Admin = result.Admin
+                Admin = result.Admin,
+                Semester = result.Semester,
+                year = result.year,
             };
             return user;
         }
@@ -168,7 +170,9 @@ namespace GraduationGuideline.data
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Admin = user.Admin
+                Admin = user.Admin,
+                Semester = user.Semester,
+                year = user.year,
             };
             _graduationGuidelineContext.User.Update(u);
             _graduationGuidelineContext.SaveChanges();
@@ -221,27 +225,134 @@ namespace GraduationGuideline.data
                     Username = step.Username,
                     StepName = step.StepName,
                     Status = step.Status,
-                    Description = step.Description
+                    Description = step.Description,
                 });
             }
             return steps;
-        }
-        public Task<UserInfoDto> GetUserInfoAsync(string username)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<StepDto> GetStepByKey(StepKeyDto stepKey)
         {
             var step = await _graduationGuidelineContext.Step.SingleOrDefaultAsync(x => x.Username == stepKey.Username && x.StepName == stepKey.StepName).ConfigureAwait(false);
-
-            var Step = new StepDto
+            var Step = new StepDto();
+            var user = await GetUserByUsername(stepKey.Username).ConfigureAwait(false);
+            if (step.StepName == "GS8")
             {
-                Username = step.Username,
-                StepName = step.StepName,
-                Status = step.Status,
-                Description = step.Description
-            };
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).GS8,
+                };
+            }
+            else if (step.StepName == "Schedule Exam")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalExam,
+
+                };
+            }
+            else if (step.StepName == "Survey of Earned Doctorates")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).Survey,
+
+                };
+            }
+            else if (step.StepName == "Final Visit")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalVisit,
+
+                };
+            }
+            else if (step.StepName == "ProQuest Fee")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalVisit,
+
+                };
+            }
+            else if (step.StepName == "Submit Thesis-Dissertation")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalVisit,
+
+                };
+            }
+            else if (step.StepName == "ETD Info")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalVisit,
+
+                };
+            }
+            else if (step.StepName == "Publishing and Copyright")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalVisit,
+
+                };
+            }
+            else if (step.StepName == "Report of Final Exam")
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description,
+                    Deadline = (await _graduationGuidelineContext.Deadline.SingleOrDefaultAsync(x => x.Semester == user.Semester && x.year == user.year).ConfigureAwait(false)).FinalVisit,
+
+                };
+            }
+            else
+            {
+                Step = new StepDto
+                {
+                    Username = step.Username,
+                    StepName = step.StepName,
+                    Status = step.Status,
+                    Description = step.Description
+                };
+            }
 
             return Step;
         }
@@ -255,22 +366,42 @@ namespace GraduationGuideline.data
                 iterationCount: 10000,
                 numBytesRequested: 256 / 8)
             );
-            
+
             var User = await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username && x.Password == user.Password).ConfigureAwait(false);
-            
-            if (User.Username == "") {
+
+            if (User.Username == "")
+            {
                 throw new ArgumentException();
             }
-            var UserInfo = new UserInfoDto {
+            var UserInfo = new UserInfoDto
+            {
                 Username = User.Username,
                 FirstName = User.FirstName,
                 LastName = User.LastName,
                 Admin = User.Admin,
                 StudentType = User.StudentType,
-                Email = User.Email  
+                Email = User.Email
             };
 
             return UserInfo;
+        }
+
+        public async Task<StepDto> ToggleStep(StepKeyDto stepKey)
+        {
+            var step = await _graduationGuidelineContext.Step.SingleOrDefaultAsync(x => x.Username == stepKey.Username && x.StepName == stepKey.StepName).ConfigureAwait(false);
+
+            step.Status = !step.Status;
+            _graduationGuidelineContext.Step.Update(step);
+            await _graduationGuidelineContext.SaveChangesAsync().ConfigureAwait(false);
+            var Step = new StepDto
+            {
+                Username = step.Username,
+                StepName = step.StepName,
+                Status = step.Status,
+                Description = step.Description
+            };
+
+            return Step;
         }
     }
 }

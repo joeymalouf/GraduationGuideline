@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
     invalidLogin: boolean;
 
-    constructor(private router: Router, private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
 
     login(form: NgForm) {
@@ -23,7 +23,7 @@ export class LoginComponent {
             let token = (<any>response).token;
             localStorage.setItem("jwt", token);
             this.invalidLogin = false;
-            this.router.navigate(["/"]);
+            window.location.href= "https://localhost:5001";
         }, err => {
             this.invalidLogin = true;
         });

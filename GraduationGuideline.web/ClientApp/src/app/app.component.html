@@ -1,21 +1,14 @@
 <div class='container-fluid'>
-  <div *ngIf="isUserAuthenticated()" class='row'>
-    <div class='col-md-3'>
+  <div class='row'>
+    <div class='col-md-3' [ngClass]="(!isUserAuthenticated()) ? 'd-none' : ''">
       <app-nav-menu></app-nav-menu>
     </div>
-    <div class='col-md-9 remove-padding'>
+    <div class='col-md-9 remove-padding ' [ngClass]="(!isUserAuthenticated()) ? 'col-md-6-important offset-md-3' : ''">
       <div class="content-container">
         <router-outlet></router-outlet>
       </div>
       <div>
         <app-footer></app-footer>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="!isUserAuthenticated()" class='row'>
-    <div class='offset-md-3 col-md-6'>
-      <div class="content-container">
-        <router-outlet></router-outlet>
       </div>
     </div>
   </div>

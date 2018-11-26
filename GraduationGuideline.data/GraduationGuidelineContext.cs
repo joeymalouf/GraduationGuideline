@@ -21,6 +21,7 @@ namespace GraduationGuideline.data
         
         public DbSet<UserEntity> User { get; set; }
         public DbSet<StepEntity> Step { get; set; }
+        public DbSet<DeadlineEntity> Deadline { get; set; }
 
         public string ProviderName => base.Database.ProviderName;
 
@@ -40,6 +41,8 @@ namespace GraduationGuideline.data
 
             builder.Entity<StepEntity>()
                 .HasKey(u => new {u.Username, u.StepName});
+
+            builder.Entity<DeadlineEntity>().HasKey(m => new {m.Semester, m.year} );
 
             base.OnModelCreating(builder);
         }

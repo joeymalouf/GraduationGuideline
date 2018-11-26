@@ -81,9 +81,7 @@ namespace GraduationGuideline.web.Controllers
                 return BadRequest(ModelState);
             }
             
-            var loginResult = await Login(new LoginDto { Username = user.Username, Password = user.Password});
-
-            return loginResult;
+            return Ok();
         }
     }
 }

@@ -1,4 +1,6 @@
 
+using System;
+
 namespace GraduationGuideline.domain.DataTransferObjects
 {
     public class StepDto
@@ -7,5 +9,6 @@ namespace GraduationGuideline.domain.DataTransferObjects
         public bool Status { get; set; }
         public string Username { get; set; }
         public string Description { get; set; }
+        public DateTime? Deadline { get; set;}
     }
 }

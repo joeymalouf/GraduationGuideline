@@ -21,9 +21,9 @@
       </li>
 
       <div class="steps">
-        <p *ngIf="!userSteps"><em>Loading...</em></p>
-        <div *ngIf="userSteps">
-          <div *ngFor="let step of userSteps">
+        <p *ngIf="!_navService.steps"><em>Loading...</em></p>
+        <div *ngIf="_navService.steps">
+          <div *ngFor="let step of _navService.steps">
             <li>
               <a [routerLink]='["/", step.stepName]' class="step-link"><span class="step-name">{{step.stepName}}</span><i
                   [ngClass]="(step.status) ? 'fa fa-check-circle complete' : 'fa fa-times-circle incomplete'"></i></a>
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <li *ngIf="isUserAuthenticated()"><a (click)="logOut()">Logout</a></li>
+      <li><a (click)="logOut()">Logout</a></li>
     </ul>
   </div>
 </div>

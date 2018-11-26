@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GraduationGuideline.domain.interfaces;
-using GraduationGuideline.domain.models;
 using GraduationGuideline.domain.DataTransferObjects;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GraduationGuideline.web.Controllers
 {
@@ -29,16 +27,24 @@ namespace GraduationGuideline.web.Controllers
         [Route("api/step/GetCurrentUserSteps")]
         public List<StepDto> GetCurrentUserSteps()
         {
-            var username = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var username = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var result = this._stepService.GetStepsByUsername(username);
             return result;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("api/step/GetStep/{stepName}")]
         public async Task<ObjectResult> GetStep(string stepName){
-            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var result = await this._stepService.GetStep(new StepKeyDto{Username = currentUser, StepName = stepName}).ConfigureAwait(false);
+            return new OkObjectResult(result);
+        }
+
+        [HttpPost]
+        [Route("api/step/ToggleStepStatus/{stepName}")]
+        public async Task<ObjectResult> ToggleStep(string stepName){
+            var currentUser = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            var result = await this._stepService.ToggleStep(new StepKeyDto{Username = currentUser, StepName = stepName}).ConfigureAwait(false);
             return new OkObjectResult(result);
         }
     }

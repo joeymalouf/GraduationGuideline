@@ -17,6 +17,7 @@ import { AuthGuard } from './guards/auth-gaurd.service';
 import { LoginComponent } from './login/login.component';
 import { JwtHelper } from 'angular2-jwt';
 import { RegisterComponent } from './register/register.component';
+import { NavService } from './services/navService.service';
 
 
 @NgModule({
@@ -62,7 +63,7 @@ import { RegisterComponent } from './register/register.component';
 
     ])
   ],
-  providers: [JwtHelper, AuthGuard],
+  providers: [JwtHelper, AuthGuard, NavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

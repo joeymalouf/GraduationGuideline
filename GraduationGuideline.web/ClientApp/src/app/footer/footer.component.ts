@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 import { HttpClient } from '@angular/common/http';
+import { NavService } from '../services/navService.service';
 
 @Component({
   selector: 'app-footer',
@@ -15,12 +16,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class FooterComponent {
-  public userSteps: Steps[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Steps[]>(baseUrl + 'api/nav/GetStepsByUsername/jmmalouf').subscribe(result => {
-      this.userSteps = result;
-    }, error => console.error(error));
+  constructor(private _navService: NavService) {
+    
   }
 }
 

@@ -1,11 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GraduationGuideline.data.Migrations
 {
-    public partial class Descriptionadded : Migration
+    public partial class Creatingdatabasewithtypegraduationanddeadlines : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Deadline",
+                columns: table => new
+                {
+                    Semester = table.Column<string>(nullable: false),
+                    year = table.Column<int>(nullable: false),
+                    GS8 = table.Column<DateTime>(nullable: false),
+                    ProQuest = table.Column<DateTime>(nullable: false),
+                    FinalVisit = table.Column<DateTime>(nullable: false),
+                    FinalExam = table.Column<DateTime>(nullable: false),
+                    Survey = table.Column<DateTime>(nullable: false),
+                    Graduation = table.Column<DateTime>(nullable: false),
+                    Commencement = table.Column<DateTime>(nullable: false),
+                    Hooding = table.Column<DateTime>(nullable: false),
+                    Audit = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Deadline", x => new { x.Semester, x.year });
+                });
+
             migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
@@ -16,7 +38,9 @@ namespace GraduationGuideline.data.Migrations
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Admin = table.Column<bool>(nullable: false)
+                    Admin = table.Column<bool>(nullable: false),
+                    Semester = table.Column<string>(nullable: true),
+                    year = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,6 +70,9 @@ namespace GraduationGuideline.data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Deadline");
+
             migrationBuilder.DropTable(
                 name: "Step");
 
