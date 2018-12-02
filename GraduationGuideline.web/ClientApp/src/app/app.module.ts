@@ -29,6 +29,8 @@ import { FinalVisitComponent } from './finalVisit/finalVisit.component';
 import { CopyrightComponent } from './copyright/copyright.component';
 import { ProQuestComponent } from './proQuestFee/proQuest.component';
 import { GraduationFeeComponent } from './graduationFee/graduationFee.component';
+import { AccountComponent } from './account/account.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import { GraduationFeeComponent } from './graduationFee/graduationFee.component'
     CopyrightComponent,
     ProQuestComponent,
     GraduationFeeComponent,
+    AccountComponent,
+    AdminComponent
     
   ],
   imports: [
@@ -63,6 +67,7 @@ import { GraduationFeeComponent } from './graduationFee/graduationFee.component'
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
       { path: 'counter', component: CounterComponent, canActivate: [AuthGuard] },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] },
       { path: 'steps', component: StepsComponent, canActivate: [AuthGuard] },
@@ -80,6 +85,7 @@ import { GraduationFeeComponent } from './graduationFee/graduationFee.component'
       { path: 'Schedule Exam', component: ScheduleExamComponent, canActivate: [AuthGuard] },
       { path: 'Publishing and Copyright', component: CopyrightComponent, canActivate: [AuthGuard] },
       { path: 'Completion', component: CelebrateComponent, canActivate: [AuthGuard] },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
 

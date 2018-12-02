@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using GraduationGuideline.domain.interfaces;
 using GraduationGuideline.domain.models;
 using GraduationGuideline.domain.DataTransferObjects;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GraduationGuideline.web.Controllers
 {
@@ -16,7 +17,7 @@ namespace GraduationGuideline.web.Controllers
             _stepService = stepService;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("api/nav/GetStepsByUsername/{username}")]
         public async Task<ObjectResult> GetStepsByUsername(string username)
         {

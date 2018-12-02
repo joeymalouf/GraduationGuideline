@@ -9,5 +9,7 @@ namespace GraduationGuideline.domain.interfaces
     {
         Task<bool> CreateAccount(FullUserDto user);
         Task<UserInfoDto> Login(LoginDto user);
+        Task<UserInfoDto> GetUserData(string username);
+        Task UpdateUserData(UserInfoDto user);
     }
 }

@@ -1,0 +1,161 @@
+<p *ngIf="!users"><em>Loading...</em></p>
+<div *ngIf="users">
+    <label for="year">Graduating Year</label>
+    <select class="form-control" [(ngModel)]="searchData.year" name="year" #studentType="ngModel">
+        <option *ngFor="let x of years" value={{x}}>
+            {{x}}
+        </option>
+    </select>
+    <label for="Semester">Semester</label>
+    <select class="form-control" [(ngModel)]="searchData.Semester" name="Semester" #studentType="ngModel">
+        <option *ngFor="let x of semesters" value={{x}}>
+            {{x}}
+        </option>
+    </select>
+    <p></p>
+    <button (click)="getUsersAndSteps()" class="btn btn-primary">Search</button>
+    <table class="table table-borderless">
+        <thead>
+            <th>Username</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users" class="admin-table-username">
+                <td>{{user.username}}</td>
+                <td *ngFor="let step of user.steps" [ngClass]="(step.status) ? 'btn-success' : 'btn-danger'">
+                    <div>{{step.stepName}}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+<br>
+
+<p class="content-header">Due Dates</p>
+<p *ngIf="!deadlines"><em>Loading...</em></p>
+<div *ngIf="deadlines">
+    <table class="table">
+        <thead>
+            <th>
+                Year : Semester
+            </th>
+            <th>
+                GS8
+            </th>
+            <th>
+                ProQuest Fee
+            </th>
+            <th>
+                Final Visit
+            </th>
+            <th>
+                Final Exam
+            </th>
+            <th>
+                Doctorate Survey
+            </th>
+            <th>
+                Graduation
+            </th>
+            <th>
+                Commencement
+            </th>
+            <th>
+                Hooding
+            </th>
+            <th>
+                Audit
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let deadline of deadlines" class="">
+                <td>{{deadline.year}} {{deadline.semester}}</td>
+                <td>
+                    {{deadline.gS8 | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.proQuest | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.finalVisit | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.finalExam | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.survey | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.graduation | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.commencement | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.hooding | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                    {{deadline.audit | date:'MM/dd/yyyy'}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+
+    <p class="content-header">Create Deadlines For new Semester</p>
+    <form>
+        <div class="form-group">
+            <label for="year">Graduating Year</label>
+            <select class="form-control" [(ngModel)]="addDeadline.year" name="year" #year="ngModel">
+                <option *ngFor="let x of years" value={{x}}>
+                    {{x}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="semester">Semester</label>
+            <select class="form-control" [(ngModel)]="addDeadline.semester" name="semester" #semester="ngModel">
+                <option *ngFor="let x of semesters" value={{x}}>
+                    {{x}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gS8">GS8</label>
+            <input type="date" class="form-control" name="gS8" [(ngModel)]="addDeadline.gS8" #gS8="ngModel" [ngClass]="{ 'is-invalid': gS8.invalid }"
+                required />
+        </div>
+        <div class="form-group">
+            <label for="proQuest">Thesis/Dissertation ProQuest</label>
+            <input type="date" class="form-control" name="proQuest" [(ngModel)]="addDeadline.proQuest" #proQuest="ngModel"
+                [ngClass]="{ 'is-invalid': proQuest.invalid }" required />
+        </div>
+        <div class="form-group">
+            <label for="graduation">Graduation</label>
+            <input type="date" class="form-control" name="graduation" [(ngModel)]="addDeadline.graduation" #graduation="ngModel"
+                [ngClass]="{ 'is-invalid': graduation.invalid }" required />
+        </div>
+        <div class="form-group">
+            <label for="commencement">Commencement</label>
+            <input type="date" class="form-control" name="commencement" [(ngModel)]="addDeadline.commencement"
+                #commencement="ngModel" [ngClass]="{ 'is-invalid': commencement.invalid }" required />
+        </div>
+        <div class="form-group">
+            <label for="hooding">Doctoral Hooding</label>
+            <input type="date" class="form-control" name="hooding" [(ngModel)]="addDeadline.hooding" #hooding="ngModel"
+                [ngClass]="{ 'is-invalid': hooding.invalid }" required />
+        </div>
+        <div class="form-group">
+            <label for="audit">Audit</label>
+            <input type="date" class="form-control" name="audit" [(ngModel)]="addDeadline.audit" #audit="ngModel"
+                [ngClass]="{ 'is-invalid': audit.invalid }" required />
+        </div>
+        <div class="form-group">
+            <button (click)="AddDeadline()" class="btn btn-primary">Add Deadlines</button>
+        </div>
+
+    </form>
+</div>

@@ -12,7 +12,7 @@ namespace GraduationGuideline.domain.DataTransferObjects
         public string LastName { get; set; }
         public bool Admin { get; set; }
         public string Semester { get; set; }
-        public DateTime year { get; set; }
+        public int year { get; set; }
 
         public List<StepDto> Steps { get; set; }
     }

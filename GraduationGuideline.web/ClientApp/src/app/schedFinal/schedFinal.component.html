@@ -6,12 +6,9 @@
     <div class="content-body">
         <p></p>
         <p>
-            <span class="keyword">Task:</span><br> You must fill out a GS-8, Application for Graduate Degree Form. This
-            form must be signed by you, and the dean of the department.
-            This form must then be turned in to the graduate school.
+            <span class="keyword">Task:</span><br>&nbsp;Set up your final oral/written exam by completing a&nbsp;<a href="https://gradschool.olemiss.edu/wp-content/uploads/sites/36/2016/01/gs7_authorization_for_final_exam_rev2016.pdf">GS7-Authorization of Final Oral/Written Examination Form.</a>
         </p>
-        <p *ngIf="unsetDate"><span class="keyword">Deadline:</span><br>This deadline has not been updated by an administrator</p>
-        <p *ngIf="!unsetDate"><span class="keyword">Deadline:</span><br>{{step.deadline | date:'MM/dd/yyyy'}}</p>
+        <p><span class="keyword">Deadline:</span><br>This form must be received by the Graduate School no later than 14 calendar days<strong>&nbsp;before&nbsp;</strong>the intended date of the exam.&nbsp;You must complete your final exam by the last day of the semester, and a final exam cannot be given during the university’s examination period or when the university is closed.</p>
 
         <p></p>
         <p><button (click)='toggleStatus()' [ngClass]="(step.status) ? 'btn btn-success' : 'btn btn-danger'">{{statusText}}</button></p>

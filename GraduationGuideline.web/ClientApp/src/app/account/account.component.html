@@ -1,0 +1,61 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Update Account</h3>
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label for="FirstName">First Name</label>
+                        <input type="text" class="form-control" name="FirstName" [(ngModel)]="model.firstName" #FirstName="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && FirstName.invalid }" required />
+                        <div *ngIf="f.submitted && FirstName.invalid" class="invalid-feedback">
+                            <div *ngIf="FirstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="LastName">Last Name</label>
+                        <input type="text" class="form-control" name="LastName" [(ngModel)]="model.lastName" #LastName="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && LastName.invalid }" required />
+                        <div *ngIf="f.submitted && LastName.invalid" class="invalid-feedback">
+                            <div *ngIf="LastName.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" class="form-control" name="Email" [(ngModel)]="model.email" #Email="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }" required email />
+                        <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
+                            <div *ngIf="Email.errors.required">Email is required</div>
+                            <div *ngIf="Email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="StudentType">Student Type</label>
+                        <select class="form-control" [(ngModel)]="model.studentType" name="StudentType" #StudentType="ngModel">
+                            <option *ngFor="let x of types" value={{x}}>
+                                {{x}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Graduating Year</label>
+                        <select class="form-control" [(ngModel)]="model.year" name="year" #studentType="ngModel">
+                            <option *ngFor="let x of years" value={{x}}>
+                                {{x}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Semester">Semester</label>
+                        <select class="form-control" [(ngModel)]="model.semester" name="Semester" #studentType="ngModel">
+                            <option *ngFor="let x of semesters" value={{x}}>
+                                {{x}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Update Info</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

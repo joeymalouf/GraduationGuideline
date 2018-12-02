@@ -25,6 +25,15 @@ namespace GraduationGuideline.domain.services
             return result;
         }
 
+        public async Task<UserInfoDto> GetUserData(string username)
+        {
+            if (username == "") {
+                throw new ArgumentNullException();
+            }
+            var result = await this._repository.GetUserByUsername(username).ConfigureAwait(false);
+            return result;
+        }
+
         public Task<UserInfoDto> Login(LoginDto user)
         {
             if (user.Username == "" || user.Password == "") {
@@ -32,6 +41,11 @@ namespace GraduationGuideline.domain.services
             }
             var result = this._repository.Login(user);
             return result;
+        }
+
+        public async Task UpdateUserData(UserInfoDto user)
+        {
+            await this._repository.EditUser(user).ConfigureAwait(false);
         }
     }
 }

@@ -92,9 +92,15 @@ namespace GraduationGuideline.data
         }
 
 
-        public async Task<List<UserWithStepsDto>> GetAllUsersAndSteps()
+        public async Task<List<UserWithStepsDto>> GetAllUsersAndSteps(string semester, int year)
         {
-            var result = await _graduationGuidelineContext.User.ToListAsync().ConfigureAwait(false);
+            var result = new List<UserEntity>();
+            if ((semester == "Fall" || semester == "Spring" || semester == "Summer") && year > 2010 && year < 2050) {
+                result = await _graduationGuidelineContext.User.Where(x => x.Semester == semester && x.year == year).ToListAsync().ConfigureAwait(false);
+            }
+            else {
+                result = await _graduationGuidelineContext.User.ToListAsync().ConfigureAwait(false);
+            }
             List<UserWithStepsDto> users = new List<UserWithStepsDto>();
             foreach (UserEntity user in result)
             {
@@ -107,6 +113,8 @@ namespace GraduationGuideline.data
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Admin = user.Admin,
+                    Semester = user.Semester,
+                    year = user.year,
                     Steps = steps
                 };
                 users.Add(u);
@@ -136,21 +144,16 @@ namespace GraduationGuideline.data
             return user;
         }
 
-        public void EditUser(UserInfoDto user)
+        public async Task EditUser(UserInfoDto user)
         {
-            var u = _graduationGuidelineContext.User.SingleOrDefault(x => x.Username == user.Username);
-            u = new UserEntity
-            {
-                Username = user.Username,
-                Password = u.Password,
-                StudentType = user.StudentType,
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Admin = user.Admin,
-                Semester = user.Semester,
-                year = user.year,
-            };
+            var u = await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username).ConfigureAwait(false);
+            u.StudentType = user.StudentType;
+            u.FirstName = user.FirstName;
+            u.LastName = user.LastName;
+            u.Semester = user.Semester;
+            u.year = user.year;
+            u.Email = user.Email;
+
             _graduationGuidelineContext.User.Update(u);
             _graduationGuidelineContext.SaveChanges();
         }
@@ -499,6 +502,39 @@ namespace GraduationGuideline.data
                     Audit = deadline.Audit,
                 };
             return Deadline;
+        }
+
+        public async Task AdminEditUser(UserWithStepsDto user)
+        {
+            var User = await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username).ConfigureAwait(false);
+            User.StudentType = user.StudentType;
+            User.FirstName = user.FirstName;
+            User.LastName = user.LastName;
+            User.Semester = user.Semester;
+            User.year = user.year;
+            User.Email = user.Email;
+            User.Admin = user.Admin;
+
+            _graduationGuidelineContext.User.Update(User);
+            foreach (StepDto step in user.Steps) {
+                var Step = await _graduationGuidelineContext.Step.SingleOrDefaultAsync(x => x.Username == step.Username && x.StepName == step.StepName).ConfigureAwait(false);
+                Step.Status = step.Status;
+                _graduationGuidelineContext.Step.Update(Step);
+            }
+            _graduationGuidelineContext.SaveChanges();
+        }
+
+        public Task AdminCreateUser(UserInfoDto user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task AdminDeleteUser(UserInfoDto user)
+        {
+            this.RemoveSteps(user.Username);
+            var result = await _graduationGuidelineContext.User.SingleOrDefaultAsync(x => x.Username == user.Username).ConfigureAwait(false);
+            _graduationGuidelineContext.User.Remove(result);
+            _graduationGuidelineContext.SaveChanges();
         }
     }
 }
