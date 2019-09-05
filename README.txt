@@ -1,3 +1,5 @@
+This was a school project...
+
 Graduation Guideline
 
 Current Status:
